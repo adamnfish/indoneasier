@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, text, div, ul, li, table, thead, tbody, th, td, nav, h1, h2, p, img, button, b, a)
+import Html exposing (Html, text, div, ul, li, table, thead, tbody, th, td, nav, h1, h2, p, img, button, b, a, span)
 import Html.Attributes exposing (src, class, href)
 import Html.Events exposing (onClick)
 
@@ -86,23 +86,26 @@ view model =
     div []
         [ nav
             [ class "brown darken-1" ]
-            [ div [ class "nav-wrapper" ]
-                [ div
-                    [ class "brand-logo" ]
-                    [ text "IMM" ]
-                , ul
-                    [ class "right" ]
-                    (
-                        if model /= Welcome then
-                            [ li []
-                                [ a
-                                    [ onClick GoHome ]
-                                    [ text "Start again" ]
+            [ div
+                [ class "container" ]
+                [ div [ class "nav-wrapper" ]
+                    [ div
+                        [ class "brand-logo" ]
+                        [ text "IMM" ]
+                    , ul
+                        [ class "right" ]
+                        (
+                            if model /= Welcome then
+                                [ li []
+                                    [ a
+                                        [ onClick GoHome ]
+                                        [ text "Start again" ]
+                                    ]
                                 ]
-                            ]
-                        else
-                            []
-                    )
+                            else
+                                []
+                        )
+                    ]
                 ]
             ]
 
@@ -207,9 +210,19 @@ costTable merger ( Count count ) =
                                 [ onClick ( SelectBid merger ( Count count ) ( Bid bid ) )
                                 , class "collection-item"
                                 ]
-                                [ text ( String.fromInt bid ) ]
+                                [ b []
+                                    [ text ( String.fromInt bid ) ]
+                                , span
+                                    [ class "grey-text" ]
+                                    [ text "  : "
+                                    , text ( String.fromInt ( bid // count ) )
+                                    , text " × "
+                                    , text ( String.fromInt count )
+                                    , text ""
+                                    ]
+                                ]
                     )
-                    ( List.range 0 100 )
+                    ( List.range 0 150 )
                 )
             ]
 
@@ -281,11 +294,16 @@ payments merger count ( Bid bid ) split =
                         in
                             div []
                                 [ p []
+                                    [ text "Total cost "
+                                    , b []
+                                        [ text ( String.fromInt bid ) ]
+                                    ]
+                                , p []
                                     [ text "With "
                                     , text ( String.fromInt player1Count )
                                     , text " "
                                     , text message
-                                    , text " they receive "
+                                    , text " one player receives "
                                     , b []
                                         [ text ( String.fromInt player1 ) ]
                                     ]
@@ -294,7 +312,7 @@ payments merger count ( Bid bid ) split =
                                     , text ( String.fromInt player2Count )
                                     , text " "
                                     , text message
-                                    , text " they receive "
+                                    , text " the other player receives "
                                     , b []
                                         [ text ( String.fromInt player2 ) ]
                                     ]
