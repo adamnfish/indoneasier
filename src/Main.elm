@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, text, div, ul, li, table, thead, tbody, th, td, h1, h2, p, img, button, b, a)
+import Html exposing (Html, text, div, ul, li, table, thead, tbody, th, td, nav, h1, h2, p, img, button, b, a)
 import Html.Attributes exposing (src, class, href)
 import Html.Events exposing (onClick)
 
@@ -83,33 +83,46 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div
-        [ class "container" ]
-        [ div [ class "row" ]
-            [ h1 [] [ text "Indonesia Merger Manager" ]
-            , div [ class "divider" ] []
-            ,
-                if model /= Welcome then
-                    a
-                        [ onClick GoHome
-                        , class "waves-effect waves-light btn-small brown darken-1"
-                        ]
-                        [ text "Start again" ]
-                else
-                    text ""
-            , div []
-                [
-                    case model of
-                        Welcome ->
-                            welcome
-                        CompanySize merger ->
-                            companySize merger
-                        CostTable merger count ->
-                            costTable merger count
-                        CompanySplit merger count bid ->
-                            companySplit merger count bid
-                        Payments merger count bid split ->
-                            payments merger count bid split
+    div []
+        [ nav
+            [ class "brown darken-1" ]
+            [ div [ class "nav-wrapper" ]
+                [ div
+                    [ class "brand-logo" ]
+                    [ text "IMM" ]
+                , ul
+                    [ class "right" ]
+                    (
+                        if model /= Welcome then
+                            [ li []
+                                [ a
+                                    [ onClick GoHome ]
+                                    [ text "Start again" ]
+                                ]
+                            ]
+                        else
+                            []
+                    )
+                ]
+            ]
+
+        , div
+            [ class "container" ]
+            [ div [ class "row" ]
+                [ div []
+                    [
+                        case model of
+                            Welcome ->
+                                welcome
+                            CompanySize merger ->
+                                companySize merger
+                            CostTable merger count ->
+                                costTable merger count
+                            CompanySplit merger count bid ->
+                                companySplit merger count bid
+                            Payments merger count bid split ->
+                                payments merger count bid split
+                    ]
                 ]
             ]
         ]
