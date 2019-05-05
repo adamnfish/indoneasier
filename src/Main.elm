@@ -48,7 +48,7 @@ minPrice merger =
         Rubber ->
             30
         Oil ->
-            50
+            40
 
 ---- UPDATE ----
 
