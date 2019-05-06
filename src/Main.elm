@@ -256,7 +256,7 @@ companySplit merger ( Count count ) bid =
         ]
 
 payments : Merger -> Count -> Bid -> Split -> Html Msg
-payments merger count ( Bid bid ) split =
+payments merger ( Count count ) ( Bid bid ) split =
     let
         message =
             case merger of
@@ -289,8 +289,8 @@ payments merger count ( Bid bid ) split =
                             ]
                     Split player1Count player2Count ->
                         let
-                            player1 = bid // player1Count
-                            player2 = bid // player2Count
+                            player1 = (bid // count) * player1Count
+                            player2 = (bid // count) * player2Count
                         in
                             div []
                                 [ p []
