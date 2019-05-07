@@ -1,5 +1,7 @@
 # Indonesia Merger Manager
 
+> https://adamnfish.github.io/indomm/
+
 Webapp to help manager merges in the board game Indonesia. It can take the
 place of a mergers cost lookup table, printed or electronic.
 
