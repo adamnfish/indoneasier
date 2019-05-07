@@ -50,15 +50,9 @@ h2 {
   flex-grow: 0;
   margin: 5px 10px 10px 0px;
   height: 100px;
-  min-width: 300px;
+  min-width: 100%;
   cursor: pointer;
   background-color: #ffffff;
-}
-
-@media only screen and (max-width: 729px) {
-  .merger-item--container {
-    min-width: 100%;
-  }
 }
 
 @media only screen and (min-width: 730px) {

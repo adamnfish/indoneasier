@@ -3,6 +3,7 @@ module Main exposing (..)
 import Browser
 import Html exposing (Html, text, div, ul, li, table, thead, tbody, th, td, nav, h1, h2, p, img, button, b, a, span, em, i, br)
 import Html.Attributes exposing (src, class, classList, href, style)
+import Html.Keyed exposing (node)
 import Html.Events exposing (onClick)
 
 
@@ -158,112 +159,135 @@ welcome : Html Msg
 welcome =
     div
         []
-        [ div
+        [ node "div"
             [ class "merger--list" ]
-            [ a
-                [ onClick ( SelectMerger Shipping )
-                , class "merger-item--container z-depth-1"
-                ]
-                [ img
-                    [ src ( iconUrl Shipping )
-                    , class "merger-type--icon"
+            [
+                ( "merger-item-Shipping"
+                , a
+                    [ onClick ( SelectMerger Shipping )
+                    , class "merger-item--container z-depth-1"
                     ]
-                    []
-                , p
-                    [ class "merger-item--description" ]
-                    [ text "Shipping" ]
-                ]
-            , a
-                [ onClick ( SelectMerger Rice )
-                , class "merger-item--container z-depth-1"
-                ]
-                [ img
-                    [ src ( iconUrl Rice )
-                    , class "merger-type--icon"
+                    [ img
+                        [ src ( iconUrl Shipping )
+                        , class "merger-type--icon"
+                        ]
+                        []
+                    , p
+                        [ class "merger-item--description" ]
+                        [ text "Shipping" ]
                     ]
-                    []
-                , p
-                    [ class "merger-item--description" ]
-                    [ text "Rice" ]
-                ]
-            , a
-                [ onClick ( SelectMerger Spice )
-                , class "merger-item--container z-depth-1"
-                ]
-                [ img
-                    [ src ( iconUrl Spice )
-                    , class "merger-type--icon"
+                )
+            ,
+                ( "merger-item-Rice"
+                , a
+                    [ onClick ( SelectMerger Rice )
+                    , class "merger-item--container z-depth-1"
                     ]
-                    []
-                , p
-                    [ class "merger-item--description" ]
-                    [ text "Spice" ]
-                ]
-            , a
-                [ onClick ( SelectMerger RiceAndSpice )
-                , class "merger-item--container z-depth-1"
-                ]
-                [ img
-                    [ src ( iconUrl RiceAndSpice )
-                    , class "merger-type--icon"
+                    [ img
+                        [ src ( iconUrl Rice )
+                        , class "merger-type--icon"
+                        ]
+                        []
+                    , p
+                        [ class "merger-item--description" ]
+                        [ text "Rice" ]
                     ]
-                    []
-                , p
-                    [ class "merger-item--description" ]
-                    [ text "Rice / Spice"
-                    , br [] []
-                    , text "(Siap Faji)"
+                )
+            ,
+                ( "merger-item-Spice"
+                , a
+                    [ onClick ( SelectMerger Spice )
+                    , class "merger-item--container z-depth-1"
                     ]
-                ]
-            , a
-                [ onClick ( SelectMerger SiapFaji )
-                , class "merger-item--container z-depth-1"
-                ]
-                [ img
-                    [ src ( iconUrl SiapFaji )
-                    , class "merger-type--icon"
+                    [ img
+                        [ src ( iconUrl Spice )
+                        , class "merger-type--icon"
+                        ]
+                        []
+                    , p
+                        [ class "merger-item--description" ]
+                        [ text "Spice" ]
                     ]
-                    []
-                , p
-                    [ class "merger-item--description" ]
-                    [ text "Siap Faji" ]
-                ]
-            , a
-                [ onClick ( SelectMerger Rubber )
-                , class "merger-item--container z-depth-1"
-                ]
-                [ img
-                    [ src ( iconUrl Rubber )
-                    , class "merger-type--icon"
+                )
+            ,
+                ( "merger-item-RiceAndSpice"
+                , a
+                    [ onClick ( SelectMerger RiceAndSpice )
+                    , class "merger-item--container z-depth-1"
                     ]
-                    []
-                , p
-                    [ class "merger-item--description" ]
-                    [ text "Rubber" ]
-                ]
-            , a
-                [ onClick ( SelectMerger Oil )
-                , class "merger-item--container z-depth-1"
-                ]
-                [ img
-                    [ src ( iconUrl Oil )
-                    , class "merger-type--icon"
+                    [ img
+                        [ src ( iconUrl RiceAndSpice )
+                        , class "merger-type--icon"
+                        ]
+                        []
+                    , p
+                        [ class "merger-item--description" ]
+                        [ text "Rice / Spice"
+                        , br [] []
+                        , text "(Siap Faji)"
+                        ]
                     ]
-                    []
-                , p
-                    [ class "merger-item--description" ]
-                    [ text "Oil" ]
-                ]
+                )
+            ,
+                ( "merger-item-SiapFaji"
+                , a
+                    [ onClick ( SelectMerger SiapFaji )
+                    , class "merger-item--container z-depth-1"
+                    ]
+                    [ img
+                        [ src ( iconUrl SiapFaji )
+                        , class "merger-type--icon"
+                        ]
+                        []
+                    , p
+                        [ class "merger-item--description" ]
+                        [ text "Siap Faji" ]
+                    ]
+                )
+            ,
+                ( "merger-item-Rubber"
+                , a
+                    [ onClick ( SelectMerger Rubber )
+                    , class "merger-item--container z-depth-1"
+                    ]
+                    [ img
+                        [ src ( iconUrl Rubber )
+                        , class "merger-type--icon"
+                        ]
+                        []
+                    , p
+                        [ class "merger-item--description" ]
+                        [ text "Rubber" ]
+                    ]
+                )
+            ,
+                ( "merger-item-Oil"
+                , a
+                    [ onClick ( SelectMerger Oil )
+                    , class "merger-item--container z-depth-1"
+                    ]
+                    [ img
+                        [ src ( iconUrl Oil )
+                        , class "merger-type--icon"
+                        ]
+                        []
+                    , p
+                        [ class "merger-item--description" ]
+                        [ text "Oil" ]
+                    ]
+                )
             ]
         ]
 
-companySizeButton : Merger -> Int -> Html Msg
+companySizeButton : Merger -> Int -> ( String, Html Msg )
 companySizeButton merger size =
-    a
+    ( "company-size--" ++ ( String.fromInt size )
+    , a
         [ onClick ( SelectCount merger ( Count size ) )
         , class "collection-item"
         ]
         [ text ( String.fromInt size ) ]
+    )
 
 companySize : Merger -> Html Msg
 companySize merger =
@@ -271,11 +295,15 @@ companySize merger =
         sizeSelection = companySizeButton merger
     in
         div []
-            [ div [ class "collection with-header collection-links" ]
+            [ node "div"
+                [ class "collection with-header collection-links" ]
                 (
-                    [ div
-                        [ class "collection-header" ]
-                        [ h2 [] [ text "Company size" ] ]
+                    [
+                        ( "company-size--header"
+                        , div
+                            [ class "collection-header" ]
+                            [ h2 [] [ text "Company size" ] ]
+                        )
                     ] ++ List.map
                         sizeSelection
                         ( List.range 1 25 )
@@ -289,18 +317,22 @@ costTable merger ( Count count ) =
         initial = count * pricePerItem
     in
         div []
-            [ div
+            [ node "div"
                 [ class "collection with-header collection-links" ]
                 (
-                    [ div
-                        [ class "collection-header" ]
-                        [ h2 [] [ text "Final bid" ] ]
+                    [
+                        ( "bid--header"
+                        , div
+                            [ class "collection-header" ]
+                            [ h2 [] [ text "Final bid" ] ]
+                        )
                     ] ++ List.map
                         (\i ->
                             let
                                 bid = initial + (i * count)
                             in
-                                a
+                                ( "bid--" ++ ( String.fromInt i )
+                                , a
                                     [ onClick ( SelectBid merger ( Count count ) ( Bid bid ) )
                                     , class "collection-item"
                                     ]
@@ -316,6 +348,7 @@ costTable merger ( Count count ) =
                                         , text ""
                                         ]
                                     ]
+                                )
                         )
                         ( List.range 0 150 )
                 )
