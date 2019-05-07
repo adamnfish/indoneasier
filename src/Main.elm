@@ -305,7 +305,7 @@ companySize merger =
                         ( "company-size--header"
                         , div
                             [ class "collection-header" ]
-                            [ h2 [] [ text "Company size" ] ]
+                            [ h2 [] [ text "Merged company size" ] ]
                         )
                     ] ++ List.map
                         sizeSelection
