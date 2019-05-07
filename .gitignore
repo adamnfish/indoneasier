@@ -1,5 +1,7 @@
 build/
 
+.DS_Store
+
 # Created by https://www.gitignore.io/api/elm,emacs,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=elm,emacs,visualstudiocode
 

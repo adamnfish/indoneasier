@@ -111,10 +111,15 @@ view model =
                 [ class "container" ]
                 [ div [ class "nav-wrapper" ]
                     [ div
-                        [ class "brand-logo"
+                        [ class "brand-logo hide-on-small-only"
                         , onClick GoHome
                         ]
-                        [ text "IMM" ]
+                        [ text "Indonesia Merger Manager" ]
+                    , div
+                        [ class "brand-logo hide-on-med-and-up"
+                        , onClick GoHome
+                        ]
+                        [ text "IndoMM" ]
                     , ul
                         [ class "right" ]
                         (
@@ -122,9 +127,7 @@ view model =
                                 [ li []
                                     [ a
                                         [ onClick GoHome ]
-                                        [ icon "replay" "right"
-                                        , text "Start again"
-                                        ]
+                                        [ icon "replay" "right" ]
                                     ]
                                 ]
                             else
