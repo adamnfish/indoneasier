@@ -5,6 +5,7 @@ import Html exposing (Html, text, div, ul, li, nav, h2, p, img, b, a, span, em, 
 import Html.Attributes exposing (src, class)
 import Html.Keyed exposing (node)
 import Html.Events exposing (onClick)
+import Ports exposing (scrollTop)
 
 
 ---- MODEL ----
@@ -105,22 +106,36 @@ type Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
+update msg _ =
     case msg of
         SelectMerger merger ->
-            ( CompanySize merger, Cmd.none )
+            ( CompanySize merger
+            , scrollTop ()
+            )
         SelectCount merger count ->
-            ( CostTable merger count, Cmd.none )
+            ( CostTable merger count
+            , scrollTop ()
+            )
         SelectBid merger count bid ->
-            ( CompanySplit merger count bid, Cmd.none )
+            ( CompanySplit merger count bid
+            , scrollTop ()
+            )
         ChangeBid merger count bid split ->
-            ( AlterCostTable merger count bid split, Cmd.none )
+            ( AlterCostTable merger count bid split
+            , scrollTop ()
+            )
         UpdateBid merger count split bid ->
-            ( Payments merger count bid split, Cmd.none )
+            ( Payments merger count bid split
+            , scrollTop ()
+            )
         SelectSplit merger count bid split ->
-            ( Payments merger count bid split, Cmd.none )
+            ( Payments merger count bid split
+            , scrollTop ()
+            )
         GoHome ->
-            ( Welcome, Cmd.none )
+            ( Welcome
+            , scrollTop ()
+            )
 
 
 
