@@ -75,7 +75,7 @@ h2 {
   }
 }
 
-@media only screen and (min-width: 1300px) {
+@media only screen and (min-width: 1340px) {
   .merger-item--container {
     min-width: 30%;
   }
@@ -88,7 +88,7 @@ h2 {
 .merger-item--description {
   display: block;
   float: left;
-  padding: 11px 20px;
+  padding: 11px 15px;
   color: rgba(0,0,0,0.87);
 }
 
