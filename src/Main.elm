@@ -1,8 +1,8 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, text, div, ul, li, table, thead, tbody, th, td, nav, h1, h2, p, img, button, b, a, span, em, i, br)
-import Html.Attributes exposing (src, class, classList, href, style)
+import Html exposing (Html, text, div, ul, li, nav, h2, p, img, b, a, span, em, i, br)
+import Html.Attributes exposing (src, class)
 import Html.Keyed exposing (node)
 import Html.Events exposing (onClick)
 
@@ -53,6 +53,24 @@ minPrice merger =
             30
         Oil ->
             40
+
+mergerName : Merger -> String
+mergerName merger =
+    case merger of
+        Shipping ->
+            "Shipping"
+        Rice ->
+            "Rice"
+        Spice ->
+            "Spice"
+        RiceAndSpice ->
+            "Rice / spice"
+        SiapFaji ->
+            "Siap faji"
+        Rubber ->
+            "Rubber"
+        Oil ->
+            "Oil"
 
 iconUrl : Merger -> String
 iconUrl merger =
@@ -109,18 +127,8 @@ view model =
         [ nav []
             [ div
                 [ class "container" ]
-                [ div [ class "nav-wrapper" ]
-                    [ div
-                        [ class "brand-logo hide-on-small-only"
-                        , onClick GoHome
-                        ]
-                        [ text "Indonesia Merger Manager" ]
-                    , div
-                        [ class "brand-logo hide-on-med-and-up"
-                        , onClick GoHome
-                        ]
-                        [ text "IndoMM" ]
-                    , ul
+                [ div [ class "" ]
+                    [ ul
                         [ class "right" ]
                         (
                             if model /= Welcome then
@@ -133,6 +141,16 @@ view model =
                             else
                                 []
                         )
+                    , div
+                        [ class "page-heading left hide-on-very-small-only"
+                        , onClick GoHome
+                        ]
+                        [ text "Indonesia Merger Manager" ]
+                    , div
+                        [ class "page-heading left hide-above-very-small"
+                        , onClick GoHome
+                        ]
+                        [ text "IndoMM" ]
                     ]
                 ]
             ]
@@ -164,123 +182,49 @@ welcome =
         []
         [ node "div"
             [ class "merger--list" ]
-            [
-                ( "merger-item-Shipping"
-                , a
-                    [ onClick ( SelectMerger Shipping )
-                    , class "merger-item--container z-depth-1"
-                    ]
-                    [ img
-                        [ src ( iconUrl Shipping )
-                        , class "merger-type--icon"
-                        ]
-                        []
-                    , p
-                        [ class "merger-item--description" ]
-                        [ text "Shipping" ]
-                    ]
-                )
-            ,
-                ( "merger-item-Rice"
-                , a
-                    [ onClick ( SelectMerger Rice )
-                    , class "merger-item--container z-depth-1"
-                    ]
-                    [ img
-                        [ src ( iconUrl Rice )
-                        , class "merger-type--icon"
-                        ]
-                        []
-                    , p
-                        [ class "merger-item--description" ]
-                        [ text "Rice" ]
-                    ]
-                )
-            ,
-                ( "merger-item-Spice"
-                , a
-                    [ onClick ( SelectMerger Spice )
-                    , class "merger-item--container z-depth-1"
-                    ]
-                    [ img
-                        [ src ( iconUrl Spice )
-                        , class "merger-type--icon"
-                        ]
-                        []
-                    , p
-                        [ class "merger-item--description" ]
-                        [ text "Spice" ]
-                    ]
-                )
-            ,
-                ( "merger-item-RiceAndSpice"
-                , a
-                    [ onClick ( SelectMerger RiceAndSpice )
-                    , class "merger-item--container z-depth-1"
-                    ]
-                    [ img
-                        [ src ( iconUrl RiceAndSpice )
-                        , class "merger-type--icon"
-                        ]
-                        []
-                    , p
-                        [ class "merger-item--description" ]
-                        [ text "Rice / Spice"
-                        , br [] []
-                        , text "(Siap Faji)"
-                        ]
-                    ]
-                )
-            ,
-                ( "merger-item-SiapFaji"
-                , a
-                    [ onClick ( SelectMerger SiapFaji )
-                    , class "merger-item--container z-depth-1"
-                    ]
-                    [ img
-                        [ src ( iconUrl SiapFaji )
-                        , class "merger-type--icon"
-                        ]
-                        []
-                    , p
-                        [ class "merger-item--description" ]
-                        [ text "Siap Faji" ]
-                    ]
-                )
-            ,
-                ( "merger-item-Rubber"
-                , a
-                    [ onClick ( SelectMerger Rubber )
-                    , class "merger-item--container z-depth-1"
-                    ]
-                    [ img
-                        [ src ( iconUrl Rubber )
-                        , class "merger-type--icon"
-                        ]
-                        []
-                    , p
-                        [ class "merger-item--description" ]
-                        [ text "Rubber" ]
-                    ]
-                )
-            ,
-                ( "merger-item-Oil"
-                , a
-                    [ onClick ( SelectMerger Oil )
-                    , class "merger-item--container z-depth-1"
-                    ]
-                    [ img
-                        [ src ( iconUrl Oil )
-                        , class "merger-type--icon"
-                        ]
-                        []
-                    , p
-                        [ class "merger-item--description" ]
-                        [ text "Oil" ]
-                    ]
-                )
+            [ mergerButton Shipping
+            , mergerButton Rice
+            , mergerButton Spice
+            , mergerButton RiceAndSpice
+            , mergerButton SiapFaji
+            , mergerButton Rubber
+            , mergerButton Oil
             ]
         ]
+
+mergerButton : Merger -> ( String, Html Msg )
+mergerButton merger =
+    let
+        name =
+            if merger == RiceAndSpice then
+                "Rice / Spice 🡆 Siap Faji"
+            else
+                mergerName merger
+        nameEls =
+            [ text name
+            , br [] []
+            , br [] []
+            , em []
+                [ text <| String.fromInt <| minPrice merger
+                ]
+            ]
+    in
+    ( "merger-item-" ++ mergerName merger
+    , a
+        [ onClick ( SelectMerger merger )
+        , class "merger-item--container z-depth-1"
+        ]
+        [ img
+            [ src ( iconUrl merger )
+            , class "merger-type--icon"
+            ]
+            []
+        , p
+            [ class "merger-item--description" ]
+            nameEls
+        ]
+    )
+
 
 companySizeButton : Merger -> Int -> ( String, Html Msg )
 companySizeButton merger size =
@@ -391,93 +335,75 @@ companySplit merger ( Count count ) bid =
 
 payments : Merger -> Count -> Bid -> Split -> Html Msg
 payments merger ( Count count ) ( Bid bid ) split =
-    let
-        message =
-            case merger of
-                Shipping ->
-                    "Shipping"
-                Rice ->
-                    "Rice"
-                Spice ->
-                    "Spice"
-                RiceAndSpice ->
-                    "Rice / spice"
-                SiapFaji ->
-                    "Siap faji"
-                Rubber ->
-                    "Rubber"
-                Oil ->
-                    "Oil"
-    in
-        div []
-            ( case split of
-                SingleCompany ->
+    div []
+        ( case split of
+            SingleCompany ->
+                [ card "col s12"
+                    [ p
+                        [ class "payment-total--text" ]
+                        [ icon "swap_horiz" "large left"
+                        , em [] [ text "Rp " ]
+                        , b []
+                            [ text ( String.fromInt bid ) ]
+                        ]
+                    ]
+                , card "col s12"
+                    [ p []
+                        [ text "Single owner receives the full amount" ]
+                    ]
+                ]
+            Split player1Count player2Count ->
+                let
+                    player1 = (bid // count) * player1Count
+                    player2 = (bid // count) * player2Count
+                in
                     [ card "col s12"
                         [ p
                             [ class "payment-total--text" ]
-                            [ icon "swap_horiz" "large left"
+                            [ icon "swap_horiz" "large left hide-on-small-only"
                             , em [] [ text "Rp " ]
                             , b []
                                 [ text ( String.fromInt bid ) ]
                             ]
                         ]
-                    , card "col s12"
-                        [ p []
-                            [ text "Single owner receives the full amount" ]
+                    , card "col s12 m6"
+                        [ p
+                            [ class "payment-split--text" ]
+                            [ icon "person_add" "medium right"
+                            , em [] [ text "Rp " ]
+                            , b [] [ text ( String.fromInt player1 ) ]
+                            ]
+                        , p
+                            [ class "payment-split--text" ]
+                            [ img
+                                [ src ( iconUrl merger )
+                                , class "payment-merger--icon z-depth-1"
+                                ]
+                                []
+                            , text " × "
+                            , text ( String.fromInt player1Count )
+                            ]
+                        ]
+                    , card "col s12 m6"
+                        [ p
+                            [ class "payment-split--text" ]
+                            [ icon "person_add" "medium right"
+                            , em [] [ text "Rp " ]
+                            , b [] [ text ( String.fromInt player2 ) ]
+                            ]
+                        , p
+                            [ class "payment-split--text" ]
+                            [ img
+                                [ src ( iconUrl merger )
+                                , class "payment-merger--icon z-depth-1"
+                                ]
+                                []
+                            , text " × "
+                            , text ( String.fromInt player2Count )
+                            ]
                         ]
                     ]
-                Split player1Count player2Count ->
-                    let
-                        player1 = (bid // count) * player1Count
-                        player2 = (bid // count) * player2Count
-                    in
-                        [ card "col s12"
-                            [ p
-                                [ class "payment-total--text" ]
-                                [ icon "swap_horiz" "large left hide-on-small-only"
-                                , em [] [ text "Rp " ]
-                                , b []
-                                    [ text ( String.fromInt bid ) ]
-                                ]
-                            ]
-                        , card "col s12 m6"
-                            [ p
-                                [ class "payment-split--text" ]
-                                [ icon "person_add" "medium right"
-                                , em [] [ text "Rp " ]
-                                , b [] [ text ( String.fromInt player1 ) ]
-                                ]
-                            , p
-                                [ class "payment-split--text" ]
-                                [ img
-                                    [ src ( iconUrl merger )
-                                    , class "payment-merger--icon z-depth-1"
-                                    ]
-                                    []
-                                , text " × "
-                                , text ( String.fromInt player1Count )
-                                ]
-                            ]
-                        , card "col s12 m6"
-                            [ p
-                                [ class "payment-split--text" ]
-                                [ icon "person_add" "medium right"
-                                , em [] [ text "Rp " ]
-                                , b [] [ text ( String.fromInt player2 ) ]
-                                ]
-                            , p
-                                [ class "payment-split--text" ]
-                                [ img
-                                    [ src ( iconUrl merger )
-                                    , class "payment-merger--icon z-depth-1"
-                                    ]
-                                    []
-                                , text " × "
-                                , text ( String.fromInt player2Count )
-                                ]
-                            ]
-                        ]
-            )
+    )
 
 card : String -> List ( Html Msg ) -> Html Msg
 card cssClass contents =

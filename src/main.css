@@ -14,17 +14,31 @@ html {
 }
 
 nav {
+  height: 56px;
   margin-bottom: 20px;
+  line-height: 56px;
   background-color: #d7c597;
 }
 
-nav .brand-logo {
+.page-heading {
+  font-size: 1.5em;
   color: rgba(0,0,0,0.87);
   cursor: pointer;
 }
 
 nav ul a {
   color: rgba(0,0,0,0.87);
+}
+
+@media only screen and (min-width: 375px) {
+  .hide-above-very-small {
+    display: none;
+  }
+}
+@media only screen and (max-width: 374px) {
+  .hide-on-very-small-only {
+    display: none;
+  }
 }
 
 h2 {
@@ -74,7 +88,7 @@ h2 {
 .merger-item--description {
   display: block;
   float: left;
-  padding: 10px 20px;
+  padding: 5px 20px;
   color: rgba(0,0,0,0.87);
 }
 
