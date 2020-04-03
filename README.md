@@ -1,6 +1,6 @@
 # Indonesia Merger Manager
 
-Webapp to help manager merges in the board game Indonesia. It can take the
+Webapp to help manage merges in the board game Indonesia. It can take the
 place of a mergers cost lookup table, printed or electronic.
 
 The goal is to handle the details of merger calculations, leaving the
@@ -12,7 +12,7 @@ players free to consider the strategy of the merge.
 game designed by Jeroen Doumen & Joris Wiersinga and published by
 [Splotter Spellen](https://www.splottershop.com/).
 
-This application is offered free for personal for people playing an
+This application is offered free for personal use for people playing an
 official copy of the game. It is not affiliated with the board game.
 
 ## Icons
