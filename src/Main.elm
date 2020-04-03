@@ -203,7 +203,6 @@ mergerButton merger =
         nameEls =
             [ text name
             , br [] []
-            , br [] []
             , em []
                 [ text <| String.fromInt <| minPrice merger
                 ]
