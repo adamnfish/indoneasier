@@ -60,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/indomm/images/spice.png"
   },
   {
-    "revision": "b163abc7a737bae2e9c707409ab97cf3",
+    "revision": "545ae6764a01eec57b74f3eedcd2292f",
     "url": "/indomm/index.html"
   },
   {
@@ -104,12 +104,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/indomm/safari-pinned-tab.svg"
   },
   {
-    "revision": "0633caf1b3c4fd32d627",
-    "url": "/indomm/static/css/main.30d34923.chunk.css"
+    "revision": "3f1cc009541de915fa82",
+    "url": "/indomm/static/css/main.4c943de3.chunk.css"
   },
   {
-    "revision": "0633caf1b3c4fd32d627",
-    "url": "/indomm/static/js/main.0633caf1.chunk.js"
+    "revision": "3f1cc009541de915fa82",
+    "url": "/indomm/static/js/main.3f1cc009.chunk.js"
   },
   {
     "revision": "7ec677ed8bbbcd4d6a5a",
