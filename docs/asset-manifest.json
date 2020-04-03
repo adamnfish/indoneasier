@@ -1,7 +1,7 @@
 {
-  "main.css": "/indomm/static/css/main.c85a63b7.chunk.css",
-  "main.js": "/indomm/static/js/main.31d0811c.chunk.js",
-  "main.js.map": "/indomm/static/js/main.31d0811c.chunk.js.map",
+  "main.css": "/indomm/static/css/main.30d34923.chunk.css",
+  "main.js": "/indomm/static/js/main.0633caf1.chunk.js",
+  "main.js.map": "/indomm/static/js/main.0633caf1.chunk.js.map",
   "runtime~main.js": "/indomm/static/js/runtime~main.7ec677ed.js",
   "runtime~main.js.map": "/indomm/static/js/runtime~main.7ec677ed.js.map",
   "vendors~main.js": "/indomm/static/js/vendors~main.604c6712.chunk.js",
@@ -32,6 +32,6 @@
   "materialize/js/materialize.js": "/indomm/materialize/js/materialize.js",
   "materialize/js/materialize.min.js": "/indomm/materialize/js/materialize.min.js",
   "mstile-150x150.png": "/indomm/mstile-150x150.png",
-  "precache-manifest.24b119a323ce848ed5e205d5a1e196f1.js": "/indomm/precache-manifest.24b119a323ce848ed5e205d5a1e196f1.js",
+  "precache-manifest.2037e2a78deab43d6576fa2848063bd6.js": "/indomm/precache-manifest.2037e2a78deab43d6576fa2848063bd6.js",
   "safari-pinned-tab.svg": "/indomm/safari-pinned-tab.svg"
 }
