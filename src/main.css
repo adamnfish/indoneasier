@@ -30,17 +30,6 @@ nav ul a {
   color: rgba(0,0,0,0.87);
 }
 
-@media only screen and (min-width: 375px) {
-  .hide-above-very-small {
-    display: none;
-  }
-}
-@media only screen and (max-width: 374px) {
-  .hide-on-very-small-only {
-    display: none;
-  }
-}
-
 h2 {
   font-size: 2rem;
 }
@@ -107,6 +96,13 @@ h2 {
 .payment-total--text {
   font-size: 4rem;
 }
+.payment-total--button {
+  padding: 10px 15px;
+  height: 74px;
+  text-transform: none;
+  font-size: 3rem;
+  color: rgba(0,0,0,0.87);
+}
 
 .payment-merger--icon {
   clear: both;
@@ -114,4 +110,56 @@ h2 {
   height: 60px;
   margin-top: 10px;
   vertical-align: bottom;
+}
+
+.btn:hover:before {
+  opacity: 1;
+}
+
+.btn:hover:before {
+  opacity: 0.85;
+}
+
+.btn:focus:before {
+  opacity: 1;
+}
+
+.btn:focus:before {
+  opacity: 0.85;
+}
+
+.btn:before {
+    content: '';
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    transition: opacity .2s;
+    z-index: -1;
+}
+
+
+@media only screen and (min-width: 375px) {
+  .hide-above-very-small-375 {
+    display: none;
+  }
+}
+@media only screen and (max-width: 374px) {
+  .hide-on-very-small-375-only {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  .hide-above-very-small-400 {
+    display: none;
+  }
+}
+@media only screen and (max-width: 399px) {
+  .hide-on-very-small-400-only {
+    display: none;
+  }
 }

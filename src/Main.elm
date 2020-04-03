@@ -30,6 +30,7 @@ type Model
     | CostTable Merger Count
     | CompanySplit Merger Count Bid
     | Payments Merger Count Bid Split
+    | AlterCostTable Merger Count Bid Split
 
 init : ( Model, Cmd Msg )
 init =
@@ -97,6 +98,8 @@ type Msg
     = SelectMerger Merger
     | SelectCount Merger Count
     | SelectBid Merger Count Bid
+    | ChangeBid Merger Count Bid Split
+    | UpdateBid Merger Count Split Bid
     | SelectSplit Merger Count Bid Split
     | GoHome
 
@@ -110,11 +113,16 @@ update msg model =
             ( CostTable merger count, Cmd.none )
         SelectBid merger count bid ->
             ( CompanySplit merger count bid, Cmd.none )
+        ChangeBid merger count bid split ->
+            ( AlterCostTable merger count bid split, Cmd.none )
+        UpdateBid merger count split bid ->
+            ( Payments merger count bid split, Cmd.none )
         SelectSplit merger count bid split ->
             ( Payments merger count bid split, Cmd.none )
         GoHome ->
             ( Welcome, Cmd.none )
-    
+
+
 
 
 
@@ -142,12 +150,12 @@ view model =
                                 []
                         )
                     , div
-                        [ class "page-heading left hide-on-very-small-only"
+                        [ class "page-heading left hide-on-very-small-375-only"
                         , onClick GoHome
                         ]
                         [ text "Indonesia Merger Manager" ]
                     , div
-                        [ class "page-heading left hide-above-very-small"
+                        [ class "page-heading left hide-above-very-small-375"
                         , onClick GoHome
                         ]
                         [ text "IndoMM" ]
@@ -166,7 +174,9 @@ view model =
                             CompanySize merger ->
                                 companySize merger
                             CostTable merger count ->
-                                costTable merger count
+                                costTable merger count ( SelectBid merger count )
+                            AlterCostTable merger count prevBid split ->
+                                costTable merger count ( UpdateBid merger count split )
                             CompanySplit merger count bid ->
                                 companySplit merger count bid
                             Payments merger count bid split ->
@@ -256,8 +266,8 @@ companySize merger =
                 )
             ]
 
-costTable : Merger -> Count -> Html Msg
-costTable merger ( Count count ) =
+costTable : Merger -> Count -> ( Bid -> Msg ) -> Html Msg
+costTable merger ( Count count ) clickMsg =
     let
         pricePerItem = minPrice merger
         initial = count * pricePerItem
@@ -270,7 +280,7 @@ costTable merger ( Count count ) =
                         ( "bid--header"
                         , div
                             [ class "collection-header" ]
-                            [ h2 [] [ text "Final bid" ] ]
+                            [ h2 [] [ text "Bid amount" ] ]
                         )
                     ] ++ List.map
                         (\i ->
@@ -279,7 +289,7 @@ costTable merger ( Count count ) =
                             in
                                 ( "bid--" ++ ( String.fromInt i )
                                 , a
-                                    [ onClick ( SelectBid merger ( Count count ) ( Bid bid ) )
+                                    [ onClick ( clickMsg ( Bid bid ) )
                                     , class "collection-item"
                                     ]
                                     [ em [] [ text "Rp " ]
@@ -288,9 +298,9 @@ costTable merger ( Count count ) =
                                     , span
                                         [ class "grey-text" ]
                                         [ text " : "
-                                        , text ( String.fromInt ( bid // count ) )
-                                        , text " × "
                                         , text ( String.fromInt count )
+                                        , text " × "
+                                        , text ( String.fromInt ( bid // count ) )
                                         , text ""
                                         ]
                                     ]
@@ -339,16 +349,26 @@ payments merger ( Count count ) ( Bid bid ) split =
             SingleCompany ->
                 [ card "col s12"
                     [ p
-                        [ class "payment-total--text" ]
-                        [ icon "swap_horiz" "large left"
-                        , em [] [ text "Rp " ]
-                        , b []
-                            [ text ( String.fromInt bid ) ]
+                        [ class "payment-total--text hide-on-very-small-400-only" ]
+                        [ icon "swap_horiz" "large left" ]
+                    , a
+                        [ class "payment-total--button waves-effect waves-light btn btn-large blue-grey lighten-3"
+                        , onClick ( ChangeBid merger (Count count) (Bid bid) split )
+                        ]
+                        [ icon "edit" "right large"
+                        , em [] [ text "Rp "]
+                        , text ( String.fromInt bid )
                         ]
                     ]
                 , card "col s12"
-                    [ p []
-                        [ text "Single owner receives the full amount" ]
+                    [ p
+                        [ class "payment-split--text" ]
+                        [ icon "person_add" "medium right"
+                        , em [] [ text "Rp " ]
+                        , b [] [ text ( String.fromInt bid ) ]
+                        ]
+                    , p []
+                        [ text "Single owner receives the full bid amount" ]
                     ]
                 ]
             Split player1Count player2Count ->
@@ -358,11 +378,15 @@ payments merger ( Count count ) ( Bid bid ) split =
                 in
                     [ card "col s12"
                         [ p
-                            [ class "payment-total--text" ]
-                            [ icon "swap_horiz" "large left hide-on-small-only"
-                            , em [] [ text "Rp " ]
-                            , b []
-                                [ text ( String.fromInt bid ) ]
+                            [ class "payment-total--text hide-on-very-small-400-only" ]
+                            [ icon "swap_horiz" "large left" ]
+                        , a
+                            [ class "payment-total--button waves-effect waves-light btn btn-large blue-grey lighten-3"
+                            , onClick ( ChangeBid merger (Count count) (Bid bid) split )
+                            ]
+                            [ icon "edit" "right large"
+                            , em [] [ text "Rp "]
+                            , text ( String.fromInt bid )
                             ]
                         ]
                     , card "col s12 m6"
