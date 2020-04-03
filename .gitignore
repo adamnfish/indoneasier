@@ -1,5 +1,8 @@
 build/
 
+.idea/
+scratch/
+
 .DS_Store
 
 # Created by https://www.gitignore.io/api/elm,emacs,visualstudiocode
