@@ -222,8 +222,8 @@ welcome =
                 [ class "dl__docs" ]
                 [ dt [] [ text "1. New era" ]
                 , dd []
-                    [ text "Occurs when at most one company type remains "
-                    , text "(and at game start)."
+                    [ text "Occurs when at most one company type remains, "
+                    , text "and at game start."
                     , br [] []
                     , text "- remove any remaining companies"
                     , br [] []
@@ -240,19 +240,26 @@ welcome =
                     [ text "One bid per player, in previous turn order. "
                     , text "New turn order is bid amount ranked, tied players maintain their respective order."
                     , br [] []
+                    , text "Player bids are multiplied before ranking, according to their "
+                    , strong [] [ text "turn order bid"]
+                    , text " R&D level."
+                    , br [] []
                     , icon "info" "tiny"
                     , text " Pay bids into player banks."
                     ]
                 , dt [] [ text "3. Mergers" ]
                 , dd []
                     [ text "In turn order, players may announce a merger between any 2 companies "
-                    , text "until all players are unwilling or unable to declare a merger."
+                    , text "until all players are unwilling or unable to announce another."
                     , br [] []
-                    , text "Resulting company must not be larger than player's merger "
-                    , text "and announcing player must be able to hold the resulting company "
+                    , text "Players are limited by their "
+                    , strong [] [ text "merger"]
+                    , text " R&D level."
+                    , br [] []
+                    , text "Announcing player must be able to hold the resulting company "
                     , text "(i.e. owns one of the companies or has a free slot)."
                     , br [] []
-                    , text "Any player that could hold the resulting company may bid."
+                    , text "All players that could hold the resulting company may bid."
                     , br [] []
                     , icon "info" "tiny"
                     , text " Merging rice & spice into siap faji cannot be done in era "
@@ -266,9 +273,13 @@ welcome =
                 , dd []
                     [ text "In turn order, players may acquire an available company "
                     , text "until all companies are taken, "
-                    , text "or players are unable or unwilling to take another company."
+                    , text "or players are unwilling or unable to take another company."
+                    , br [] []
+                    , text "Players are limited by their "
+                    , strong [] [ text "slots"]
+                    , text " R&D level."
                     ]
-                , dt [] [ text "5. Research & development" ]
+                , dt [] [ text "5. Research & Development" ]
                 , dd []
                     [ text "In turn order, players move marker one step forward on a single track."
                     , br [] []
@@ -284,18 +295,24 @@ welcome =
                     , br [] []
                     , text "- must ship as much as possible"
                     , br [] []
-                    , text "- expand for free if all goods delivered"
+                    , text "- pay shipping costs"
+                    , br [] []
+                    , text "- expand for free if all goods sold, or pay to expand"
                     , br [] []
                     , text "Shipping companies:"
                     , br [] []
-                    , text "- may expand for free"
+                    , text "- may expand for free, up to company's era capacity"
+                    , br [] []
+                    , text "Expansions are limited by players' "
+                    , strong [] [ text "expansion"]
+                    , text " R&D level."
                     , br [] []
                     , icon "info" "tiny"
                     , text " Double earnings in the final round."
                     ]
                 , dt [] [ text "7. City growth" ]
                 , dd []
-                    [ text "Cities that were filled with all goods types available in this era grow." ]
+                    [ text "Cities grow if they were full of all goods types available in this era." ]
                 ]
             ]
         , card "col m6 s12"

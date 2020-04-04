@@ -2,16 +2,16 @@
 
 > https://adamnfish.github.io/indomm/
 
-Webapp to help manage merges in the board game Indonesia. It can take the
-place of a mergers cost lookup table, printed or electronic.
-
-The goal is to handle the details of merger calculations, leaving the
-players free to consider the strategy of the merge.
+An interactive player aid for the board game Indonesia, including a
+UI for merger payments. It can take the place of a mergers cost lookup
+table, printed or electronic. The goal is to handle the details of
+merger calculations, leaving the players free to consider the strategy
+of the merge.
 
 ## Indonesia
 
-[Indonesia](https://boardgamegeek.com/boardgame/19777/indonesia) is a board
-game designed by Jeroen Doumen & Joris Wiersinga and published by
+[Indonesia](https://boardgamegeek.com/boardgame/19777/indonesia) is a
+board game designed by Jeroen Doumen & Joris Wiersinga and published by
 [Splotter Spellen](https://www.splottershop.com/).
 
 This application is offered free for personal use for people playing an
