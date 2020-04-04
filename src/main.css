@@ -32,6 +32,23 @@ nav ul a {
 
 h2 {
   font-size: 2rem;
+  margin: 10px 0;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin-inline-start: 25px;
+}
+
+.dl__docs dd {
+  font-size: 0.8em;
+}
+
+.dl__docs i.tiny {
+  vertical-align: text-top;
 }
 
 .collection-header h2 {
