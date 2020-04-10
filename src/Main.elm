@@ -74,6 +74,24 @@ mergerName merger =
         Oil ->
             "Oil"
 
+mergerClassName : Merger -> String
+mergerClassName merger =
+    case merger of
+        Shipping ->
+            "shipping"
+        Rice ->
+            "rice"
+        Spice ->
+            "spice"
+        RiceAndSpice ->
+            "rice-spice"
+        SiapFaji ->
+            "siap-faji"
+        Rubber ->
+            "rubber"
+        Oil ->
+            "oil"
+
 iconUrl : Merger -> String
 iconUrl merger =
     case merger of
@@ -158,22 +176,17 @@ view model =
                                 [ li []
                                     [ a
                                         [ onClick GoHome ]
-                                        [ icon "replay" "right" ]
+                                        [ icon "home" "right" ]
                                     ]
                                 ]
                             else
                                 []
                         )
                     , div
-                        [ class "page-heading left hide-on-very-small-375-only"
+                        [ class "page-heading left"
                         , onClick GoHome
                         ]
-                        [ text "Indonesia Merger Manager" ]
-                    , div
-                        [ class "page-heading left hide-above-very-small-375"
-                        , onClick GoHome
-                        ]
-                        [ text "IndoMM" ]
+                        [ text "IndonEASIER" ]
                     ]
                 ]
             ]
@@ -205,15 +218,19 @@ welcome : Html Msg
 welcome =
     div
         []
-        [ node "div"
-            [ class "merger--list" ]
-            [ mergerButton Shipping
-            , mergerButton Rice
-            , mergerButton Spice
-            , mergerButton RiceAndSpice
-            , mergerButton SiapFaji
-            , mergerButton Rubber
-            , mergerButton Oil
+        [ card "col s12"
+            [ h2 []
+                [ text "Perform merger" ]
+            , node "div"
+                [ class "merger--list" ]
+                [ mergerButton Shipping
+                , mergerButton Rice
+                , mergerButton Spice
+                , mergerButton RiceAndSpice
+                , mergerButton SiapFaji
+                , mergerButton Rubber
+                , mergerButton Oil
+                ]
             ]
         , card "col s12"
             [ h2 []
@@ -240,7 +257,7 @@ welcome =
                     [ text "One bid per player, in previous turn order. "
                     , text "New turn order is bid amount ranked, tied players maintain their respective order."
                     , br [] []
-                    , text "Player bids are multiplied before ranking, according to their "
+                    , text "Player bids are multiplied before ranking according to their "
                     , strong [] [ text "turn order bid"]
                     , text " R&D level."
                     , br [] []
@@ -373,7 +390,7 @@ welcome =
                     ]
                 , dt [] [ text "Expansion" ]
                 , dd []
-                    [ text "The maximum number of expansions companies owned by the player may perform each time they operate."
+                    [ text "The maximum number of expansions that companies owned by the player may perform each time they operate."
                     ]
                 , dt [] [ text "Turn order bid" ]
                 , dd []
@@ -394,17 +411,19 @@ mergerButton merger =
         nameEls =
             [ text name
             , br [] []
-            , em []
-                [ text "Rp "
+            , span
+                [ class "grey-text" ]
+                [ em []
+                    [ text "Rp "
+                    ]
+                , text <| String.fromInt <| minPrice merger
                 ]
-            , text <| String.fromInt <| minPrice merger
-            , text " "
             ]
     in
     ( "merger-item-" ++ mergerName merger
     , a
         [ onClick ( SelectMerger merger )
-        , class "merger-item--container z-depth-1"
+        , class ("merger-item--container z-depth-1 company-type--" ++ mergerClassName merger)
         ]
         [ img
             [ src ( iconUrl merger )

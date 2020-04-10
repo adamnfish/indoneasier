@@ -1,6 +1,6 @@
-# Indonesia Merger Manager
+# IndonEASIER
 
-> https://adamnfish.github.io/indomm/
+> https://adamnfish.github.io/indoneasier/
 
 An interactive player aid for the board game Indonesia, including a
 UI for merger payments. It can take the place of a mergers cost lookup

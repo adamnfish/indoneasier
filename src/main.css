@@ -63,27 +63,28 @@ dd {
 .merger--list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .merger-item--container {
   display: block;
   flex-grow: 0;
-  margin: 5px 10px 10px 0px;
+  margin: 5px 0px 10px 0px;
   height: 100px;
   min-width: 100%;
   cursor: pointer;
   background-color: #ffffff;
 }
 
-@media only screen and (min-width: 730px) {
+@media only screen and (min-width: 754px) {
   .merger-item--container {
-    min-width: 47%;
+    min-width: 48%;
   }
 }
 
-@media only screen and (min-width: 1340px) {
+@media only screen and (min-width: 1380px) {
   .merger-item--container {
-    min-width: 30%;
+    min-width: 31%;
   }
 }
 
@@ -93,9 +94,14 @@ dd {
 
 .merger-item--description {
   display: block;
-  float: left;
-  padding: 11px 15px;
+  padding: 26px 10px 25px 15px;
   color: rgba(0,0,0,0.87);
+}
+
+@media only screen and (max-width: 368px) {
+    .company-type--rice-spice .merger-item--description {
+      padding: 17px 10px 25px 15px;
+    }
 }
 
 .merger-type--icon {
@@ -103,6 +109,7 @@ dd {
   width: 100px;
   height: 100px;
   border-right: solid 1px #ccc;
+  margin-right: 15px;
 }
 
 .payment-split--text {
