@@ -269,7 +269,7 @@ welcome =
                     [ text "In turn order, players may announce a merger between any 2 companies "
                     , text "until all players are unwilling or unable to announce another."
                     , br [] []
-                    , text "Players are limited by their "
+                    , text "Number of deeds in an announced merger is limited by player's "
                     , strong [] [ text "merger"]
                     , text " R&D level."
                     , br [] []
@@ -310,9 +310,9 @@ welcome =
                     , br [] []
                     , text "Goods companies:"
                     , br [] []
-                    , text "- must ship as much as possible"
-                    , br [] []
                     , text "- pay shipping costs"
+                    , br [] []
+                    , text "- must ship as much as possible"
                     , br [] []
                     , text "- expand for free if all goods sold, or pay to expand"
                     , br [] []
@@ -341,7 +341,8 @@ welcome =
                 , dd []
                     [ text "Number of companies the player may own at any one time. "
                     , br [] []
-                    , text "Merged companies take up only one slot."
+                    , icon "info" "tiny"
+                    , text " Merged companies take up only one slot."
                     ]
                 , dt [] [ text "Mergers" ]
                 , dd []
