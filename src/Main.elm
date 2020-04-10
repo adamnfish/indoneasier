@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Browser
 import Html exposing (Html, nav, div, text, ul, li, dl, dt, dd, h2, p, img, b, a, span, em, i, br, strong)
-import Html.Attributes exposing (src, class)
+import Html.Attributes exposing (src, class, href)
 import Html.Keyed exposing (node)
 import Html.Events exposing (onClick)
 import Ports exposing (scrollTop)
@@ -186,11 +186,10 @@ view model =
                         [ class "page-heading left"
                         , onClick GoHome
                         ]
-                        [ text "IndonEASIER" ]
+                        [ text "Indoneasier" ]
                     ]
                 ]
             ]
-
         , div
             [ class "container" ]
             [ div [ class "row" ]
@@ -219,6 +218,15 @@ welcome =
     div
         []
         [ card "col s12"
+            [ p []
+                [ text "Indoneasier is an interactive player-aid for the board game "
+                , a
+                    [ href "https://boardgamegeek.com/boardgame/19777/indonesia" ]
+                    [ text "Indonesia" ]
+                , text "."
+                ]
+            ]
+        , card "col s12"
             [ h2 []
                 [ text "Perform merger" ]
             , node "div"
