@@ -334,6 +334,35 @@ welcome =
             ]
         , card "col m6 s12"
             [ h2 []
+                [ text "R&D tracks" ]
+            , dl
+                [ class "dl__docs" ]
+                [ dt [] [ text "Slots" ]
+                , dd []
+                    [ text "Number of companies the player may own at any one time. "
+                    , br [] []
+                    , text "Merged companies take up only one slot."
+                    ]
+                , dt [] [ text "Mergers" ]
+                , dd []
+                    [ text "Limits the size of company for which the player can announce a merger."
+                    ]
+                , dt [] [ text "Hull player" ]
+                , dd []
+                    [ text "The number of goods that can be carried by ships belonging to shipping companies owned by the player. "
+                    ]
+                , dt [] [ text "Expansion" ]
+                , dd []
+                    [ text "The maximum number of expansions that companies owned by the player may perform each time they operate."
+                    ]
+                , dt [] [ text "Turn order bid" ]
+                , dd []
+                    [ text "Multiplies turn order bids made by the player for the purposes of ranking, as indicated."
+                    ]
+                ]
+            ]
+        , card "col m6 s12"
+            [ h2 []
                 [ text "Goods values" ]
             , dl
                 []
@@ -366,35 +395,6 @@ welcome =
                 , dd []
                     [ em [] [ text "Rp " ]
                     , text "50"
-                    ]
-                ]
-            ]
-        , card "col m6 s12"
-            [ h2 []
-                [ text "R&D tracks" ]
-            , dl
-                [ class "dl__docs" ]
-                [ dt [] [ text "Slots" ]
-                , dd []
-                    [ text "Number of companies the player may own at any one time. "
-                    , br [] []
-                    , text "Merged companies take up only one slot."
-                    ]
-                , dt [] [ text "Mergers" ]
-                , dd []
-                    [ text "Limits the size of company for which the player can announce a merger."
-                    ]
-                , dt [] [ text "Hull player" ]
-                , dd []
-                    [ text "The number of goods that can be carried by ships belonging to shipping companies owned by the player. "
-                    ]
-                , dt [] [ text "Expansion" ]
-                , dd []
-                    [ text "The maximum number of expansions that companies owned by the player may perform each time they operate."
-                    ]
-                , dt [] [ text "Turn order bid" ]
-                , dd []
-                    [ text "Multiplies turn order bids made by the player for the purposes of ranking, as indicated."
                     ]
                 ]
             ]
