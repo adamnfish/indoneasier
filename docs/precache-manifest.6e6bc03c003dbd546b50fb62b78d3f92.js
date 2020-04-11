@@ -32,35 +32,35 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/indoneasier/favicon.ico"
   },
   {
-    "revision": "bfc6795221042e8111556cf8293d04d1",
+    "revision": "9c61edd3512091b65c946660b261a2c6",
     "url": "/indoneasier/images/oil.png"
   },
   {
-    "revision": "b2bf3722cfc2870ad98461fb07f13357",
+    "revision": "a801f6cc9b8be0bb48b10fc59618df03",
     "url": "/indoneasier/images/rice.png"
   },
   {
-    "revision": "2ce01d8f3af6e04c688f22e3daac357b",
+    "revision": "6754ceabd1e84588468c8c6fb8d5475f",
     "url": "/indoneasier/images/ricespice.png"
   },
   {
-    "revision": "9eff0e17cae6ac2a2d8c35c8808b4fe0",
+    "revision": "4a5fa47780c9389b958e68e2f39ebe23",
     "url": "/indoneasier/images/rubber.png"
   },
   {
-    "revision": "fa7a7d004eb1cc5ce33dce6f2d18b3de",
+    "revision": "ebdd0fc7e04b2f4d72559f9dcebb272d",
     "url": "/indoneasier/images/shipping.png"
   },
   {
-    "revision": "c1a3a386c6aab2568a47cefd4f560ef9",
+    "revision": "4b478f86bf8d1b6974c99faccc582973",
     "url": "/indoneasier/images/siapfaji.png"
   },
   {
-    "revision": "51a8aea5287efba052622665be86d4aa",
+    "revision": "189abfd8fc2695c2d563e2a280a4dba9",
     "url": "/indoneasier/images/spice.png"
   },
   {
-    "revision": "4ef48e15ba64664c6026e2780becb3b8",
+    "revision": "f656f025a6476b486e4e80660ee607d1",
     "url": "/indoneasier/index.html"
   },
   {
@@ -104,12 +104,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/indoneasier/safari-pinned-tab.svg"
   },
   {
-    "revision": "a698a932405e716e361c",
-    "url": "/indoneasier/static/css/main.d725f0d8.chunk.css"
+    "revision": "e4da2915da183e666b03",
+    "url": "/indoneasier/static/css/main.42aaf8fc.chunk.css"
   },
   {
-    "revision": "a698a932405e716e361c",
-    "url": "/indoneasier/static/js/main.a698a932.chunk.js"
+    "revision": "e4da2915da183e666b03",
+    "url": "/indoneasier/static/js/main.e4da2915.chunk.js"
   },
   {
     "revision": "6885760ced3e206a0e61",
