@@ -68,7 +68,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/indoneasier/logo.svg"
   },
   {
-    "revision": "19572282cd60c82d9e731555c4c42fea",
+    "revision": "3f58385ef0dec09ab76f21fbb015ad80",
     "url": "/indoneasier/manifest.json"
   },
   {
