@@ -13,6 +13,10 @@ html {
   background-color: #f7f7f7;
 }
 
+.nowrap {
+  display: inline-block;
+}
+
 nav {
   height: 56px;
   margin-bottom: 20px;
@@ -70,19 +74,19 @@ dd {
   display: block;
   flex-grow: 0;
   margin: 5px 0px 10px 0px;
-  height: 100px;
+  height: 75px;
   min-width: 100%;
   cursor: pointer;
   background-color: #ffffff;
 }
 
-@media only screen and (min-width: 754px) {
+@media only screen and (min-width: 670px) {
   .merger-item--container {
     min-width: 48%;
   }
 }
 
-@media only screen and (min-width: 1380px) {
+@media only screen and (min-width: 1250px) {
   .merger-item--container {
     min-width: 31%;
   }
@@ -94,20 +98,20 @@ dd {
 
 .merger-item--description {
   display: block;
-  padding: 26px 10px 25px 15px;
+  padding: 16px 10px 25px 15px;
   color: rgba(0,0,0,0.87);
 }
 
-@media only screen and (max-width: 368px) {
+@media only screen and (max-width: 340px) {
     .company-type--rice-spice .merger-item--description {
-      padding: 17px 10px 25px 15px;
+      padding: 6px 10px 25px 15px;
     }
 }
 
 .merger-type--icon {
   float: left;
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   border-right: solid 1px #ccc;
   margin-right: 15px;
 }

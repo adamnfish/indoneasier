@@ -414,11 +414,19 @@ mergerButton merger =
     let
         name =
             if merger == RiceAndSpice then
-                "Rice & Spice (Siap faji)"
+                span []
+                    [ span
+                        [ class "nowrap" ]
+                        [ text "Rice & Spice" ]
+                    , text " "
+                    , span
+                        [ class "nowrap" ]
+                        [ text "(Siap faji)" ]
+                    ]
             else
-                mergerName merger
+                text <| mergerName merger
         nameEls =
-            [ text name
+            [ name
             , br [] []
             , span
                 [ class "grey-text" ]
