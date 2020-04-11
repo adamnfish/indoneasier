@@ -1,4 +1,4 @@
-# IndonEASIER
+# Indoneasier
 
 > https://adamnfish.github.io/indoneasier/
 
