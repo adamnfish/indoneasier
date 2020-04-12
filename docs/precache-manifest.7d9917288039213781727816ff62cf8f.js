@@ -60,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/indoneasier/images/spice.png"
   },
   {
-    "revision": "f656f025a6476b486e4e80660ee607d1",
+    "revision": "d2c5d783fe8de93b24f894242d0f997d",
     "url": "/indoneasier/index.html"
   },
   {
@@ -104,12 +104,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/indoneasier/safari-pinned-tab.svg"
   },
   {
-    "revision": "e4da2915da183e666b03",
+    "revision": "fe655577af321c85493f",
     "url": "/indoneasier/static/css/main.42aaf8fc.chunk.css"
   },
   {
-    "revision": "e4da2915da183e666b03",
-    "url": "/indoneasier/static/js/main.e4da2915.chunk.js"
+    "revision": "fe655577af321c85493f",
+    "url": "/indoneasier/static/js/main.fe655577.chunk.js"
   },
   {
     "revision": "6885760ced3e206a0e61",

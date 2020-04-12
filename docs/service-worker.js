@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/indoneasier/precache-manifest.14401f088f1cfb0c0c7a24b102af9917.js"
+  "/indoneasier/precache-manifest.7d9917288039213781727816ff62cf8f.js"
 );
 
 workbox.core.skipWaiting();

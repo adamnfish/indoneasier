@@ -1,7 +1,7 @@
 {
   "main.css": "/indoneasier/static/css/main.42aaf8fc.chunk.css",
-  "main.js": "/indoneasier/static/js/main.e4da2915.chunk.js",
-  "main.js.map": "/indoneasier/static/js/main.e4da2915.chunk.js.map",
+  "main.js": "/indoneasier/static/js/main.fe655577.chunk.js",
+  "main.js.map": "/indoneasier/static/js/main.fe655577.chunk.js.map",
   "runtime~main.js": "/indoneasier/static/js/runtime~main.6885760c.js",
   "runtime~main.js.map": "/indoneasier/static/js/runtime~main.6885760c.js.map",
   "vendors~main.js": "/indoneasier/static/js/vendors~main.604c6712.chunk.js",
@@ -32,6 +32,6 @@
   "materialize/js/materialize.js": "/indoneasier/materialize/js/materialize.js",
   "materialize/js/materialize.min.js": "/indoneasier/materialize/js/materialize.min.js",
   "mstile-150x150.png": "/indoneasier/mstile-150x150.png",
-  "precache-manifest.14401f088f1cfb0c0c7a24b102af9917.js": "/indoneasier/precache-manifest.14401f088f1cfb0c0c7a24b102af9917.js",
+  "precache-manifest.7d9917288039213781727816ff62cf8f.js": "/indoneasier/precache-manifest.7d9917288039213781727816ff62cf8f.js",
   "safari-pinned-tab.svg": "/indoneasier/safari-pinned-tab.svg"
 }
