@@ -352,6 +352,9 @@ welcome =
                     , text "Players are limited by their "
                     , strong [] [ text "slots" ]
                     , text " R&D level."
+                    , br [] []
+                    , icon "info" "tiny"
+                    , text " Merged companies of any size take up only one slot."
                     ]
                 , dt [] [ text "5. Research & Development" ]
                 , dd []
@@ -397,9 +400,6 @@ welcome =
                 [ dt [] [ text "Slots" ]
                 , dd []
                     [ text "Number of companies the player may own at any one time. "
-                    , br [] []
-                    , icon "info" "tiny"
-                    , text " Merged companies take up only one slot."
                     ]
                 , dt [] [ text "Mergers" ]
                 , dd []
