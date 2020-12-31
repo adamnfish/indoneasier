@@ -452,7 +452,7 @@ welcome =
                 , dt [] [ text "Oil" ]
                 , dd []
                     [ em [] [ text "Rp " ]
-                    , text "50"
+                    , text "40"
                     ]
                 ]
             ]
