@@ -60,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/indoneasier/images/spice.png"
   },
   {
-    "revision": "d2c5d783fe8de93b24f894242d0f997d",
+    "revision": "8564504d5e9cc2957a66aff17214335c",
     "url": "/indoneasier/index.html"
   },
   {
@@ -104,19 +104,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/indoneasier/safari-pinned-tab.svg"
   },
   {
-    "revision": "fe655577af321c85493f",
-    "url": "/indoneasier/static/css/main.42aaf8fc.chunk.css"
+    "revision": "fe934ff6c7b6196f28ee",
+    "url": "/indoneasier/static/css/main.bc642899.chunk.css"
   },
   {
-    "revision": "fe655577af321c85493f",
-    "url": "/indoneasier/static/js/main.fe655577.chunk.js"
+    "revision": "fe934ff6c7b6196f28ee",
+    "url": "/indoneasier/static/js/main.fe934ff6.chunk.js"
   },
   {
     "revision": "6885760ced3e206a0e61",
     "url": "/indoneasier/static/js/runtime~main.6885760c.js"
   },
   {
-    "revision": "604c6712e7dcf2851e2c",
-    "url": "/indoneasier/static/js/vendors~main.604c6712.chunk.js"
+    "revision": "0b49ec49a892799f59f3",
+    "url": "/indoneasier/static/js/vendors~main.0b49ec49.chunk.js"
   }
 ]);
