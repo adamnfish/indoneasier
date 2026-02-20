@@ -5,8 +5,7 @@
   "private": true,
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html --no-source-maps --public-url ./",
-    "lint": "elm-review --src src"
+    "build": "parcel build src/index.html --no-source-maps --public-url ./"
   },
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.16.4",
