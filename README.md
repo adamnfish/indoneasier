@@ -40,7 +40,14 @@ assets.
 ## Code overview
 
 Indoneasier is a static webapp written in [Elm](https://elm-lang.org/).
-The source code is in the [`src`](src) directory, public assets are in
-the [`public`](public) directory and the static production assets used to
-serve the [live version](https://adamnfish.github.io/indoneasier/) are in
-the [`docs`](docs) directory.
+The source code is in the [`src`](src) directory and public assets are in
+the [`public`](public) directory.
+
+The project uses [Parcel](https://parceljs.org/) as its build tool.
+
+```bash
+npm install        # install dependencies
+npm start          # start the dev server
+npm run build      # production build (output in dist/)
+npm run lint       # run elm-review
+```

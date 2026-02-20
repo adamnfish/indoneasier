@@ -1,4 +1,6 @@
-build/
+node_modules/
+dist/
+.parcel-cache/
 
 .idea/
 scratch/
@@ -47,7 +49,6 @@ tramp
 
 # cask packages
 .cask/
-dist/
 
 # Flycheck
 flycheck_*.el
