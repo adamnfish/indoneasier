@@ -1,5 +1,6 @@
-elm-app build || exit
-rm -r docs/*
-cp -r build/* docs/
+#!/usr/bin/env bash
+# This script is superseded by a GitHub Actions workflow for CI/CD.
+# Run `npm run build` to produce a production build in the dist/ directory.
+npm run build || exit
 
-echo "commit and push to complete deployment"
+echo "Build complete. Output is in the dist/ directory."

@@ -35,7 +35,23 @@ type Split
     | Split Int Int
 
 
-type Model
+type alias Assets =
+    { shipping : String
+    , rice : String
+    , spice : String
+    , ricespice : String
+    , siapfaji : String
+    , rubber : String
+    , oil : String
+    }
+
+
+type alias Flags =
+    { assets : Assets
+    }
+
+
+type Lifecycle
     = Welcome
     | CompanySize Merger
     | CostTable Merger Count
@@ -44,9 +60,19 @@ type Model
     | AlterCostTable Merger Count Bid Split
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( Welcome, Cmd.none )
+type alias Model =
+    { lifecycle : Lifecycle
+    , assets : Assets
+    }
+
+
+init : Flags -> ( Model, Cmd Msg )
+init flags =
+    ( { lifecycle = Welcome
+      , assets = flags.assets
+      }
+    , Cmd.none
+    )
 
 
 minPrice : Merger -> Int
@@ -124,29 +150,29 @@ mergerClassName merger =
             "oil"
 
 
-iconUrl : Merger -> String
-iconUrl merger =
+iconUrl : Assets -> Merger -> String
+iconUrl assets merger =
     case merger of
         Shipping ->
-            "%PUBLIC_URL%/images/shipping.png"
+            assets.shipping
 
         Rice ->
-            "%PUBLIC_URL%/images/rice.png"
+            assets.rice
 
         Spice ->
-            "%PUBLIC_URL%/images/spice.png"
+            assets.spice
 
         RiceAndSpice ->
-            "%PUBLIC_URL%/images/ricespice.png"
+            assets.ricespice
 
         SiapFaji ->
-            "%PUBLIC_URL%/images/siapfaji.png"
+            assets.siapfaji
 
         Rubber ->
-            "%PUBLIC_URL%/images/rubber.png"
+            assets.rubber
 
         Oil ->
-            "%PUBLIC_URL%/images/oil.png"
+            assets.oil
 
 
 
@@ -164,40 +190,40 @@ type Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg _ =
+update msg model =
     case msg of
         SelectMerger merger ->
-            ( CompanySize merger
+            ( { model | lifecycle = CompanySize merger }
             , scrollTop ()
             )
 
         SelectCount merger count ->
-            ( CostTable merger count
+            ( { model | lifecycle = CostTable merger count }
             , scrollTop ()
             )
 
         SelectBid merger count bid ->
-            ( CompanySplit merger count bid
+            ( { model | lifecycle = CompanySplit merger count bid }
             , scrollTop ()
             )
 
         ChangeBid merger count bid split ->
-            ( AlterCostTable merger count bid split
+            ( { model | lifecycle = AlterCostTable merger count bid split }
             , scrollTop ()
             )
 
         UpdateBid merger count split bid ->
-            ( Payments merger count bid split
+            ( { model | lifecycle = Payments merger count bid split }
             , scrollTop ()
             )
 
         SelectSplit merger count bid split ->
-            ( Payments merger count bid split
+            ( { model | lifecycle = Payments merger count bid split }
             , scrollTop ()
             )
 
         GoHome ->
-            ( Welcome
+            ( { model | lifecycle = Welcome }
             , scrollTop ()
             )
 
@@ -215,7 +241,7 @@ view model =
                 [ div [ class "" ]
                     [ ul
                         [ class "right" ]
-                        (if model /= Welcome then
+                        (if model.lifecycle /= Welcome then
                             [ li []
                                 [ a
                                     [ onClick GoHome ]
@@ -238,9 +264,9 @@ view model =
             [ class "container" ]
             [ div [ class "row" ]
                 [ div []
-                    [ case model of
+                    [ case model.lifecycle of
                         Welcome ->
-                            welcome
+                            welcome model.assets
 
                         CompanySize merger ->
                             companySize merger
@@ -255,15 +281,15 @@ view model =
                             companySplit merger count bid
 
                         Payments merger count bid split ->
-                            payments merger count bid split
+                            payments model.assets merger count bid split
                     ]
                 ]
             ]
         ]
 
 
-welcome : Html Msg
-welcome =
+welcome : Assets -> Html Msg
+welcome assets =
     div
         []
         [ card "col s12"
@@ -280,13 +306,13 @@ welcome =
                 [ text "Perform merger" ]
             , node "div"
                 [ class "merger--list" ]
-                [ mergerButton Shipping
-                , mergerButton Rice
-                , mergerButton Spice
-                , mergerButton RiceAndSpice
-                , mergerButton SiapFaji
-                , mergerButton Rubber
-                , mergerButton Oil
+                [ mergerButton assets Shipping
+                , mergerButton assets Rice
+                , mergerButton assets Spice
+                , mergerButton assets RiceAndSpice
+                , mergerButton assets SiapFaji
+                , mergerButton assets Rubber
+                , mergerButton assets Oil
                 ]
             ]
         , card "col s12"
@@ -459,8 +485,8 @@ welcome =
         ]
 
 
-mergerButton : Merger -> ( String, Html Msg )
-mergerButton merger =
+mergerButton : Assets -> Merger -> ( String, Html Msg )
+mergerButton assets merger =
     let
         name =
             if merger == RiceAndSpice then
@@ -495,7 +521,7 @@ mergerButton merger =
         , class ("merger-item--container z-depth-1 company-type--" ++ mergerClassName merger)
         ]
         [ img
-            [ src (iconUrl merger)
+            [ src (iconUrl assets merger)
             , class "merger-type--icon"
             ]
             []
@@ -618,8 +644,8 @@ companySplit merger (Count count) bid =
         ]
 
 
-payments : Merger -> Count -> Bid -> Split -> Html Msg
-payments merger (Count count) (Bid bid) split =
+payments : Assets -> Merger -> Count -> Bid -> Split -> Html Msg
+payments assets merger (Count count) (Bid bid) split =
     div []
         (case split of
             SingleCompany ->
@@ -679,7 +705,7 @@ payments merger (Count count) (Bid bid) split =
                     , p
                         [ class "payment-split--text" ]
                         [ img
-                            [ src (iconUrl merger)
+                            [ src (iconUrl assets merger)
                             , class "payment-merger--icon z-depth-1"
                             ]
                             []
@@ -697,7 +723,7 @@ payments merger (Count count) (Bid bid) split =
                     , p
                         [ class "payment-split--text" ]
                         [ img
-                            [ src (iconUrl merger)
+                            [ src (iconUrl assets merger)
                             , class "payment-merger--icon z-depth-1"
                             ]
                             []
@@ -733,11 +759,11 @@ icon iconName cssClass =
 ---- PROGRAM ----
 
 
-main : Program () Model Msg
+main : Program Flags Model Msg
 main =
     Browser.element
         { view = view
-        , init = \_ -> init
+        , init = init
         , update = update
         , subscriptions = always Sub.none
         }
