@@ -5,6 +5,32 @@
   More context in the issue:
     https://github.com/halfzebra/create-elm-app/issues/320
 */
+:focus-visible {
+  outline: 3px solid #98C1C0;
+}
+
+a {
+  color: #7A8640;
+}
+
+a:visited {
+  color: #353A26;
+}
+
+a:hover, a:active {
+  color: #353A26;
+}
+
+.welcome-description a,
+.welcome-description a:visited {
+  color: #353A26;
+}
+
+.welcome-description a:hover,
+.welcome-description a:active {
+  color: #1a2010;
+}
+
 [data-elm-hot="true"] {
   height: inherit;
 }
@@ -49,12 +75,12 @@ nav {
 }
 
 main {
-  background-color: #f7f7f7;
+  background-color: #DED9C3;
   padding: 10px 8px;
   flex-grow: 1;
 }
 
-main div {
+.welcome, .screen {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -84,27 +110,127 @@ footer {
 }
 
 .card {
-  background-color: white;
-  border: 1px solid rgba(163, 156, 112 ,0.87);
-  border-left: 4px solid rgba(163, 156, 112 ,0.87);
+  background-color: #f5f2e8;
   border-radius: 4px;
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.2), 0px 1px 1px rgba(0,0,0,0.14), 0px 2px 1px rgba(0,0,0,0.12);
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+  overflow: hidden;
 }
 
 .card-title {
-  background-color: rgba(163, 156, 112, 0.87);
-  color: rgba(0, 0, 0, 0.87);
-  padding: 4px 6px;
-}
-
-.card-content {
-  padding: 0 8px;
-  color: rgba(0,0,0,0.87);
+  background-color: #7A8640;
+  color: #DED9C3;
+  padding: 6px 10px;
 }
 
 .card h2 {
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: normal;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   margin: 0;
+}
+
+.card-content {
+  padding: 8px 10px;
+  color: rgba(0,0,0,0.87);
+}
+
+/* Documentation cards */
+
+.doc-card {
+  background-color: #f5f2e8;
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+
+.doc-card-title {
+  background-color: #7A8640;
+  color: #DED9C3;
+  padding: 4px 10px;
+}
+
+.doc-card h2 {
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.doc-card-content {
+  padding: 4px 10px;
+  color: rgba(0,0,0,0.87);
+}
+
+/* Merger buttons */
+
+.merger--list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 8px;
+}
+
+.merger--hint {
+  margin: 0;
+  font-size: 0.8em;
+  font-style: italic;
+  color: rgba(0,0,0,0.4);
+}
+
+.merger-item--container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px 10px;
+  background-color: #f5f2e8;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-bottom: 3px solid #b8c278;
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+  cursor: pointer;
+  font-family: serif;
+  color: rgba(0,0,0,0.87);
+  transition: box-shadow 0.15s ease, border-bottom-color 0.15s ease, transform 0.1s ease;
+}
+
+.merger-item--container:hover {
+  box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
+  border-bottom-color: #7A8640;
+  background-color: #eae6d4;
+}
+
+.merger-item--container:active {
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.1);
+  border-bottom-width: 1px;
+  transform: translateY(2px);
+}
+
+.merger-item--container:focus-visible {
+  outline: 2px solid #98C1C0;
+  outline-offset: 2px;
+  box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
+  border-bottom-color: #7A8640;
+}
+
+.merger-type--icon {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 2px;
+}
+
+.merger-item--name {
+  font-size: 0.85em;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.merger-item--price {
+  font-size: 0.8em;
+  color: rgba(0,0,0,0.45);
 }
 
 dt {
@@ -113,6 +239,10 @@ dt {
 
 dd {
   margin-inline-start: 25px;
+}
+
+dl {
+  margin: 0;
 }
 
 .dl__docs dd {

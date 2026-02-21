@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, a, b, br, dd, div, dl, dt, em, footer, h2, i, img, li, main_, nav, p, span, strong, text, ul)
+import Html exposing (Html, a, b, br, button, dd, div, dl, dt, em, footer, h2, i, img, li, main_, nav, p, span, strong, text, ul)
 import Html.Attributes exposing (class, href, src)
 import Html.Events exposing (onClick)
 import Html.Keyed exposing (node)
@@ -240,7 +240,9 @@ view model =
                 [ class "nav-title"
                 , onClick GoHome
                 ]
-                [ text "Indoneasier" ]
+                [ text "Indon"
+                , strong [] [ text "easier" ]
+                ]
             , div [ class "nav-bg" ] []
             ]
         , div [ class "welcome-description" ]
@@ -285,181 +287,189 @@ view model =
 welcome : Assets -> Html Msg
 welcome assets =
     div
-        []
-        [ card "Perform merger"
-            [ node "div"
-                [ class "merger--list" ]
-                [ mergerButton assets Shipping
-                , mergerButton assets Rice
-                , mergerButton assets Spice
-                , mergerButton assets RiceAndSpice
-                , mergerButton assets SiapFaji
-                , mergerButton assets Rubber
-                , mergerButton assets Oil
-                ]
+        [ class "welcome" ]
+        [ p [ class "merger--hint" ] [ text "Select a company type to calculate a merger" ]
+        , node "div"
+            [ class "merger--list" ]
+            [ mergerButton assets Shipping
+            , mergerButton assets Rice
+            , mergerButton assets Spice
+            , mergerButton assets RiceAndSpice
+            , mergerButton assets SiapFaji
+            , mergerButton assets Rubber
+            , mergerButton assets Oil
             ]
-        , card "Game phases"
-            [ dl
-                [ class "dl__docs" ]
-                [ dt [] [ text "1. New era" ]
-                , dd []
-                    [ text "Occurs when at most one company type remains, "
-                    , text "and at game start."
-                    , br [] []
-                    , text "- remove any remaining companies"
-                    , br [] []
-                    , text "- players place next era's city"
-                    , br [] []
-                    , text "- distribute next era's companies"
-                    , br [] []
-                    , text "Game ends if "
-                    , strong [] [ text "era c" ]
-                    , text " ends."
-                    ]
-                , dt [] [ text "2. Turn order" ]
-                , dd []
-                    [ text "One bid per player, in previous turn order. "
-                    , text "New turn order is bid amount ranked, tied players maintain their respective order."
-                    , br [] []
-                    , text "Player bids are multiplied before ranking according to their "
-                    , strong [] [ text "turn order bid" ]
-                    , text " R&D level."
-                    , br [] []
-                    , icon "info" "tiny"
-                    , text " Pay bids into player banks."
-                    ]
-                , dt [] [ text "3. Mergers" ]
-                , dd []
-                    [ text "In turn order, players may announce a merger between any 2 companies "
-                    , text "until all players are unwilling or unable to announce another."
-                    , br [] []
-                    , text "Number of deeds in an announced merger is limited by player's "
-                    , strong [] [ text "merger" ]
-                    , text " R&D level."
-                    , br [] []
-                    , text "Announcing player must be able to hold the resulting company "
-                    , text "(i.e. owns one of the companies or has a free slot)."
-                    , br [] []
-                    , text "All players that could hold the resulting company may bid."
-                    , br [] []
-                    , icon "info" "tiny"
-                    , text " Merging rice & spice into siap faji cannot be done in "
-                    , strong [] [ text "era a" ]
-                    , text "."
-                    , br [] []
-                    , icon "info" "tiny"
-                    , text " After creating siap faji from rice & spice remove half (round up) land areas."
-                    ]
-                , dt [] [ text "4. Acquisitions" ]
-                , dd []
-                    [ text "In turn order, players may acquire an available company "
-                    , text "until all companies are taken, "
-                    , text "or players are unwilling or unable to take another company."
-                    , br [] []
-                    , text "Players are limited by their "
-                    , strong [] [ text "slots" ]
-                    , text " R&D level."
-                    , br [] []
-                    , icon "info" "tiny"
-                    , text " Merged companies of any size take up only one slot."
-                    ]
-                , dt [] [ text "5. Research & Development" ]
-                , dd []
-                    [ text "In turn order, players move marker one step forward on a single track."
-                    , br [] []
-                    , icon "info" "tiny"
-                    , text " May upgrade another player's hull size."
-                    ]
-                , dt [] [ text "6. Operations" ]
-                , dd []
-                    [ text "In turn order, players operate one of their companies "
-                    , text "until all companies have operated."
-                    , br [] []
-                    , text "Goods companies:"
-                    , br [] []
-                    , text "- ship goods to cities with capacity"
-                    , br [] []
-                    , text "- each good is sold on a chain of ships from a single company"
-                    , br [] []
-                    , text "- pay shipping costs to owners"
-                    , br [] []
-                    , text "- must ship as much as possible"
-                    , br [] []
-                    , text "- must expand for free if all goods sold, or may pay to expand"
-                    , br [] []
-                    , text "Shipping companies:"
-                    , br [] []
-                    , text "- may expand for free, up to company's era capacity"
-                    , br [] []
-                    , text "Expansions are limited by players' "
-                    , strong [] [ text "expansion" ]
-                    , text " R&D level."
-                    , br [] []
-                    , icon "info" "tiny"
-                    , text " Double earnings in the final round."
-                    ]
-                , dt [] [ text "7. City growth" ]
-                , dd []
-                    [ text "Cities grow if they were full of all available goods types." ]
-                ]
-            ]
-        , card "R&D tracks"
-            [ dl
-                [ class "dl__docs" ]
-                [ dt [] [ text "Slots" ]
-                , dd []
-                    [ text "Number of companies the player may own at any one time. "
-                    ]
-                , dt [] [ text "Mergers" ]
-                , dd []
-                    [ text "Limits the size of company for which the player can announce a merger."
-                    ]
-                , dt [] [ text "Hull player" ]
-                , dd []
-                    [ text "The number of goods that can be carried by ships belonging to shipping companies owned by the player. "
-                    ]
-                , dt [] [ text "Expansion" ]
-                , dd []
-                    [ text "The maximum number of expansions that companies owned by the player may perform each time they operate."
-                    ]
-                , dt [] [ text "Turn order bid" ]
-                , dd []
-                    [ text "Multiplies turn order bids made by the player for the purposes of ranking, as indicated."
+        , div [ class "doc-card" ]
+            [ div [ class "doc-card-title" ] [ h2 [] [ text "Game phases" ] ]
+            , div [ class "doc-card-content" ]
+                [ dl
+                    [ class "dl__docs" ]
+                    [ dt [] [ text "1. New era" ]
+                    , dd []
+                        [ text "Occurs when at most one company type remains, "
+                        , text "and at game start."
+                        , br [] []
+                        , text "- remove any remaining companies"
+                        , br [] []
+                        , text "- players place next era's city"
+                        , br [] []
+                        , text "- distribute next era's companies"
+                        , br [] []
+                        , text "Game ends if "
+                        , strong [] [ text "era c" ]
+                        , text " ends."
+                        ]
+                    , dt [] [ text "2. Turn order" ]
+                    , dd []
+                        [ text "One bid per player, in previous turn order. "
+                        , text "New turn order is bid amount ranked, tied players maintain their respective order."
+                        , br [] []
+                        , text "Player bids are multiplied before ranking according to their "
+                        , strong [] [ text "turn order bid" ]
+                        , text " R&D level."
+                        , br [] []
+                        , icon "info" "tiny"
+                        , text " Pay bids into player banks."
+                        ]
+                    , dt [] [ text "3. Mergers" ]
+                    , dd []
+                        [ text "In turn order, players may announce a merger between any 2 companies "
+                        , text "until all players are unwilling or unable to announce another."
+                        , br [] []
+                        , text "Number of deeds in an announced merger is limited by player's "
+                        , strong [] [ text "merger" ]
+                        , text " R&D level."
+                        , br [] []
+                        , text "Announcing player must be able to hold the resulting company "
+                        , text "(i.e. owns one of the companies or has a free slot)."
+                        , br [] []
+                        , text "All players that could hold the resulting company may bid."
+                        , br [] []
+                        , icon "info" "tiny"
+                        , text " Merging rice & spice into siap faji cannot be done in "
+                        , strong [] [ text "era a" ]
+                        , text "."
+                        , br [] []
+                        , icon "info" "tiny"
+                        , text " After creating siap faji from rice & spice remove half (round up) land areas."
+                        ]
+                    , dt [] [ text "4. Acquisitions" ]
+                    , dd []
+                        [ text "In turn order, players may acquire an available company "
+                        , text "until all companies are taken, "
+                        , text "or players are unwilling or unable to take another company."
+                        , br [] []
+                        , text "Players are limited by their "
+                        , strong [] [ text "slots" ]
+                        , text " R&D level."
+                        , br [] []
+                        , icon "info" "tiny"
+                        , text " Merged companies of any size take up only one slot."
+                        ]
+                    , dt [] [ text "5. Research & Development" ]
+                    , dd []
+                        [ text "In turn order, players move marker one step forward on a single track."
+                        , br [] []
+                        , icon "info" "tiny"
+                        , text " May upgrade another player's hull size."
+                        ]
+                    , dt [] [ text "6. Operations" ]
+                    , dd []
+                        [ text "In turn order, players operate one of their companies "
+                        , text "until all companies have operated."
+                        , br [] []
+                        , text "Goods companies:"
+                        , br [] []
+                        , text "- ship goods to cities with capacity"
+                        , br [] []
+                        , text "- each good is sold on a chain of ships from a single company"
+                        , br [] []
+                        , text "- pay shipping costs to owners"
+                        , br [] []
+                        , text "- must ship as much as possible"
+                        , br [] []
+                        , text "- must expand for free if all goods sold, or may pay to expand"
+                        , br [] []
+                        , text "Shipping companies:"
+                        , br [] []
+                        , text "- may expand for free, up to company's era capacity"
+                        , br [] []
+                        , text "Expansions are limited by players' "
+                        , strong [] [ text "expansion" ]
+                        , text " R&D level."
+                        , br [] []
+                        , icon "info" "tiny"
+                        , text " Double earnings in the final round."
+                        ]
+                    , dt [] [ text "7. City growth" ]
+                    , dd []
+                        [ text "Cities grow if they were full of all available goods types." ]
                     ]
                 ]
             ]
-        , card "Goods values"
-            [ dl
-                []
-                [ dt [] [ text "Shipping" ]
-                , dd []
-                    [ em [] [ text "Rp " ]
-                    , text "5 / ship"
+        , div [ class "doc-card" ]
+            [ div [ class "doc-card-title" ] [ h2 [] [ text "R&D tracks" ] ]
+            , div [ class "doc-card-content" ]
+                [ dl
+                    [ class "dl__docs" ]
+                    [ dt [] [ text "Slots" ]
+                    , dd []
+                        [ text "Number of companies the player may own at any one time. "
+                        ]
+                    , dt [] [ text "Mergers" ]
+                    , dd []
+                        [ text "Limits the size of company for which the player can announce a merger."
+                        ]
+                    , dt [] [ text "Hull player" ]
+                    , dd []
+                        [ text "The number of goods that can be carried by ships belonging to shipping companies owned by the player. "
+                        ]
+                    , dt [] [ text "Expansion" ]
+                    , dd []
+                        [ text "The maximum number of expansions that companies owned by the player may perform each time they operate."
+                        ]
+                    , dt [] [ text "Turn order bid" ]
+                    , dd []
+                        [ text "Multiplies turn order bids made by the player for the purposes of ranking, as indicated."
+                        ]
                     ]
-                , dt [] [ text "Rice" ]
-                , dd []
-                    [ em [] [ text "Rp " ]
-                    , text "20"
-                    ]
-                , dt [] [ text "Spice" ]
-                , dd []
-                    [ em [] [ text "Rp " ]
-                    , text "25"
-                    ]
-                , dt [] [ text "SiapFaji" ]
-                , dd []
-                    [ em [] [ text "Rp " ]
-                    , text "35"
-                    ]
-                , dt [] [ text "Rubber" ]
-                , dd []
-                    [ em [] [ text "Rp " ]
-                    , text "30"
-                    ]
-                , dt [] [ text "Oil" ]
-                , dd []
-                    [ em [] [ text "Rp " ]
-                    , text "40"
+                ]
+            ]
+        , div [ class "doc-card" ]
+            [ div [ class "doc-card-title" ] [ h2 [] [ text "Goods values" ] ]
+            , div [ class "doc-card-content" ]
+                [ dl
+                    []
+                    [ dt [] [ text "Shipping" ]
+                    , dd []
+                        [ em [] [ text "Rp " ]
+                        , text "5 / ship"
+                        ]
+                    , dt [] [ text "Rice" ]
+                    , dd []
+                        [ em [] [ text "Rp " ]
+                        , text "20"
+                        ]
+                    , dt [] [ text "Spice" ]
+                    , dd []
+                        [ em [] [ text "Rp " ]
+                        , text "25"
+                        ]
+                    , dt [] [ text "SiapFaji" ]
+                    , dd []
+                        [ em [] [ text "Rp " ]
+                        , text "35"
+                        ]
+                    , dt [] [ text "Rubber" ]
+                    , dd []
+                        [ em [] [ text "Rp " ]
+                        , text "30"
+                        ]
+                    , dt [] [ text "Oil" ]
+                    , dd []
+                        [ em [] [ text "Rp " ]
+                        , text "40"
+                        ]
                     ]
                 ]
             ]
@@ -470,45 +480,24 @@ mergerButton : Assets -> Merger -> ( String, Html Msg )
 mergerButton assets merger =
     let
         name =
-            if merger == RiceAndSpice then
-                span []
-                    [ span
-                        [ class "nowrap" ]
-                        [ text "Rice & Spice" ]
-                    , text " "
-                    , span
-                        [ class "nowrap" ]
-                        [ text "(Siap faji)" ]
-                    ]
-
-            else
-                text <| mergerName merger
-
-        nameEls =
-            [ name
-            , br [] []
-            , span
-                [ class "grey-text" ]
-                [ em []
-                    [ text "Rp "
-                    ]
-                , text <| String.fromInt <| minPrice merger
-                ]
-            ]
+            span [ class "merger-item--name" ] [ text <| mergerName merger ]
     in
     ( "merger-item-" ++ mergerName merger
-    , a
+    , button
         [ onClick (SelectMerger merger)
-        , class ("merger-item--container z-depth-1 company-type--" ++ mergerClassName merger)
+        , class ("merger-item--container company-type--" ++ mergerClassName merger)
         ]
         [ img
             [ src (iconUrl assets merger)
             , class "merger-type--icon"
             ]
             []
-        , p
-            [ class "merger-item--description" ]
-            nameEls
+        , name
+        , span
+            [ class "merger-item--price" ]
+            [ em [] [ text "Rp " ]
+            , text <| String.fromInt <| minPrice merger
+            ]
         ]
     )
 
@@ -530,7 +519,7 @@ companySize merger =
         sizeSelection =
             companySizeButton merger
     in
-    div []
+    div [ class "screen" ]
         [ node "div"
             [ class "collection with-header collection-links" ]
             ([ ( "company-size--header"
