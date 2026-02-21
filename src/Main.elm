@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, a, b, br, dd, div, dl, dt, em, h2, i, img, li, nav, p, span, strong, text, ul)
+import Html exposing (Html, a, b, br, dd, div, dl, dt, em, footer, h2, i, img, li, main_, nav, p, span, strong, text, ul)
 import Html.Attributes exposing (class, href, src)
 import Html.Events exposing (onClick)
 import Html.Keyed exposing (node)
@@ -234,57 +234,51 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
+    div [ class "app" ]
         [ nav []
             [ div
-                [ class "container" ]
-                [ div [ class "" ]
-                    [ ul
-                        [ class "right" ]
-                        (if model.lifecycle /= Welcome then
-                            [ li []
-                                [ a
-                                    [ onClick GoHome ]
-                                    [ icon "home" "right" ]
-                                ]
-                            ]
-
-                         else
-                            []
-                        )
-                    , div
-                        [ class "page-heading left"
-                        , onClick GoHome
-                        ]
-                        [ text "Indoneasier" ]
-                    ]
+                [ class "nav-title"
+                , onClick GoHome
                 ]
+                [ text "Indoneasier" ]
+            , div [ class "nav-bg" ] []
+            ]
+        , div [ class "welcome-description" ]
+            [ text "an interactive player-aid for the board game "
+            , a
+                [ href "https://boardgamegeek.com/boardgame/19777/indonesia" ]
+                [ text "Indonesia" ]
+            ]
+        , main_
+            [ class "container" ]
+            [ case model.lifecycle of
+                Welcome ->
+                    welcome model.assets
+
+                CompanySize merger ->
+                    companySize merger
+
+                CostTable merger count ->
+                    costTable merger count (SelectBid merger count)
+
+                AlterCostTable merger count prevBid split ->
+                    costTable merger count (UpdateBid merger count split)
+
+                CompanySplit merger count bid ->
+                    companySplit merger count bid
+
+                Payments merger count bid split ->
+                    payments model.assets merger count bid split
             ]
         , div
-            [ class "container" ]
-            [ div [ class "row" ]
-                [ div []
-                    [ case model.lifecycle of
-                        Welcome ->
-                            welcome model.assets
-
-                        CompanySize merger ->
-                            companySize merger
-
-                        CostTable merger count ->
-                            costTable merger count (SelectBid merger count)
-
-                        AlterCostTable merger count prevBid split ->
-                            costTable merger count (UpdateBid merger count split)
-
-                        CompanySplit merger count bid ->
-                            companySplit merger count bid
-
-                        Payments merger count bid split ->
-                            payments model.assets merger count bid split
-                    ]
-                ]
+            [ class "welcome-description" ]
+            [ a [ href "https://boardgamegeek.com/user/adamnfish" ] [ text "adamnfish" ]
+            , text " | "
+            , a [ href "https://github.com/adamnfish/indoneasier" ] [ text "source code" ]
             ]
+        , footer
+            []
+            []
         ]
 
 
@@ -292,19 +286,8 @@ welcome : Assets -> Html Msg
 welcome assets =
     div
         []
-        [ card "col s12"
-            [ p []
-                [ text "Indoneasier is an interactive player-aid for the board game "
-                , a
-                    [ href "https://boardgamegeek.com/boardgame/19777/indonesia" ]
-                    [ text "Indonesia" ]
-                , text "."
-                ]
-            ]
-        , card "col s12"
-            [ h2 []
-                [ text "Perform merger" ]
-            , node "div"
+        [ card "Perform merger"
+            [ node "div"
                 [ class "merger--list" ]
                 [ mergerButton assets Shipping
                 , mergerButton assets Rice
@@ -315,10 +298,8 @@ welcome assets =
                 , mergerButton assets Oil
                 ]
             ]
-        , card "col s12"
-            [ h2 []
-                [ text "Game phases" ]
-            , dl
+        , card "Game phases"
+            [ dl
                 [ class "dl__docs" ]
                 [ dt [] [ text "1. New era" ]
                 , dd []
@@ -331,8 +312,8 @@ welcome assets =
                     , br [] []
                     , text "- distribute next era's companies"
                     , br [] []
-                    , text "Game ends if era "
-                    , strong [] [ text "c" ]
+                    , text "Game ends if "
+                    , strong [] [ text "era c" ]
                     , text " ends."
                     ]
                 , dt [] [ text "2. Turn order" ]
@@ -362,8 +343,8 @@ welcome assets =
                     , text "All players that could hold the resulting company may bid."
                     , br [] []
                     , icon "info" "tiny"
-                    , text " Merging rice & spice into siap faji cannot be done in era "
-                    , strong [] [ text "a" ]
+                    , text " Merging rice & spice into siap faji cannot be done in "
+                    , strong [] [ text "era a" ]
                     , text "."
                     , br [] []
                     , icon "info" "tiny"
@@ -396,11 +377,15 @@ welcome assets =
                     , br [] []
                     , text "Goods companies:"
                     , br [] []
-                    , text "- pay shipping costs"
+                    , text "- ship goods to cities with capacity"
+                    , br [] []
+                    , text "- each good is sold on a chain of ships from a single company"
+                    , br [] []
+                    , text "- pay shipping costs to owners"
                     , br [] []
                     , text "- must ship as much as possible"
                     , br [] []
-                    , text "- expand for free if all goods sold, or pay to expand"
+                    , text "- must expand for free if all goods sold, or may pay to expand"
                     , br [] []
                     , text "Shipping companies:"
                     , br [] []
@@ -415,13 +400,11 @@ welcome assets =
                     ]
                 , dt [] [ text "7. City growth" ]
                 , dd []
-                    [ text "Cities grow if they were full of all goods types available in this era." ]
+                    [ text "Cities grow if they were full of all available goods types." ]
                 ]
             ]
-        , card "col m6 s12"
-            [ h2 []
-                [ text "R&D tracks" ]
-            , dl
+        , card "R&D tracks"
+            [ dl
                 [ class "dl__docs" ]
                 [ dt [] [ text "Slots" ]
                 , dd []
@@ -445,10 +428,8 @@ welcome assets =
                     ]
                 ]
             ]
-        , card "col m6 s12"
-            [ h2 []
-                [ text "Goods values" ]
-            , dl
+        , card "Goods values"
+            [ dl
                 []
                 [ dt [] [ text "Shipping" ]
                 , dd []
@@ -649,7 +630,7 @@ payments assets merger (Count count) (Bid bid) split =
     div []
         (case split of
             SingleCompany ->
-                [ card "col s12"
+                [ card "TODO"
                     [ p
                         [ class "payment-total--text hide-on-very-small-400-only" ]
                         [ icon "swap_horiz" "large left" ]
@@ -662,7 +643,7 @@ payments assets merger (Count count) (Bid bid) split =
                         , text (String.fromInt bid)
                         ]
                     ]
-                , card "col s12"
+                , card "TODO"
                     [ p
                         [ class "payment-split--text" ]
                         [ icon "person_add" "medium right"
@@ -682,7 +663,7 @@ payments assets merger (Count count) (Bid bid) split =
                     player2 =
                         (bid // count) * player2Count
                 in
-                [ card "col s12"
+                [ card "TODO"
                     [ p
                         [ class "payment-total--text hide-on-very-small-400-only" ]
                         [ icon "swap_horiz" "large left" ]
@@ -695,7 +676,7 @@ payments assets merger (Count count) (Bid bid) split =
                         , text (String.fromInt bid)
                         ]
                     ]
-                , card "col s12 m6"
+                , card "TODO"
                     [ p
                         [ class "payment-split--text" ]
                         [ icon "person_add" "medium right"
@@ -713,7 +694,7 @@ payments assets merger (Count count) (Bid bid) split =
                         , text (String.fromInt player1Count)
                         ]
                     ]
-                , card "col s12 m6"
+                , card "TODO"
                     [ p
                         [ class "payment-split--text" ]
                         [ icon "person_add" "medium right"
@@ -736,12 +717,15 @@ payments assets merger (Count count) (Bid bid) split =
 
 
 card : String -> List (Html Msg) -> Html Msg
-card cssClass contents =
+card heading contents =
     div
-        [ class cssClass ]
+        []
         [ div
             [ class "card" ]
             [ div
+                [ class "card-title" ]
+                [ h2 [] [ text heading ] ]
+            , div
                 [ class "card-content" ]
                 contents
             ]

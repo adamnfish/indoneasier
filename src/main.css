@@ -9,9 +9,17 @@
   height: inherit;
 }
 
-html {
-  background-color: #f7f7f7;
-  background-image: url('../public/bg.png');
+html, body {
+  margin: 0;
+  background-color: #353A26;
+  font-family: serif;
+  height: 100%;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .nowrap {
@@ -20,24 +28,83 @@ html {
 
 nav {
   height: 56px;
-  margin-bottom: 20px;
   line-height: 56px;
-  background-color: #d7c597;
+  background-color: #353A26;
+  display: flex;
+  border-bottom: solid 1px rgba(53, 58, 38, 0.5);
+}
+
+.nav-title {
+  padding: 10px 8px;
+  flex-shrink: 0;
+  color: rgba(163, 156, 112, 0.87);
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.nav-bg {
+  flex-grow: 1;
+  background-image: url('../public/nav-bg.png');
+  background-size: cover;
+}
+
+main {
+  background-color: #f7f7f7;
+  padding: 10px 8px;
+  flex-grow: 1;
+}
+
+main div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+footer {
+  height: 40px;
+  background-image: url('../public/nav-bg.png');
+  background-size: cover;
+  border-top: solid 1px rgba(53, 58, 38, 0.5);
+}
+
+.welcome-description {
+  font-size: small;
+  padding: 3px 6px;
+  background-color: rgba(163, 156, 112);
+  color: rgba(53, 58, 38, 0.87);
+  border-top: solid 1px rgb(53, 58, 38);
+  border-bottom: solid 1px rgba(53, 58, 38);
+  text-align: right;
 }
 
 .page-heading {
   font-size: 1.5em;
-  color: rgba(0,0,0,0.87);
+  color: rgba(163, 156, 112 ,0.87);
   cursor: pointer;
 }
 
-nav ul a {
+.card {
+  background-color: white;
+  border: 1px solid rgba(163, 156, 112 ,0.87);
+  border-left: 4px solid rgba(163, 156, 112 ,0.87);
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.2), 0px 1px 1px rgba(0,0,0,0.14), 0px 2px 1px rgba(0,0,0,0.12);
+}
+
+.card-title {
+  background-color: rgba(163, 156, 112, 0.87);
+  color: rgba(0, 0, 0, 0.87);
+  padding: 4px 6px;
+}
+
+.card-content {
+  padding: 0 8px;
   color: rgba(0,0,0,0.87);
 }
 
-h2 {
-  font-size: 2rem;
-  margin: 10px 0;
+.card h2 {
+  font-size: 18px;
+  margin: 0;
 }
 
 dt {
@@ -54,141 +121,5 @@ dd {
 
 .dl__docs i.tiny {
   vertical-align: text-top;
-}
-
-.collection-header h2 {
-  margin: 10px;
-}
-
-.collection-links a.collection-item {
-  cursor: pointer;
-  color: black;
-}
-
-.merger--list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.merger-item--container {
-  display: block;
-  flex-grow: 0;
-  margin: 5px 0px 10px 0px;
-  height: 75px;
-  min-width: 100%;
-  cursor: pointer;
-  background-color: #ffffff;
-}
-
-@media only screen and (min-width: 670px) {
-  .merger-item--container {
-    min-width: 48%;
-  }
-}
-
-@media only screen and (min-width: 1250px) {
-  .merger-item--container {
-    min-width: 31%;
-  }
-}
-
-.merger-item--container:hover {
-  background-color: #dddddd;
-}
-
-.merger-item--description {
-  display: block;
-  padding: 16px 10px 25px 15px;
-  color: rgba(0,0,0,0.87);
-}
-
-@media only screen and (max-width: 340px) {
-    .company-type--rice-spice .merger-item--description {
-      padding: 6px 10px 25px 15px;
-    }
-}
-
-.merger-type--icon {
-  float: left;
-  width: 75px;
-  height: 75px;
-  border-right: solid 1px #ccc;
-  margin-right: 15px;
-}
-
-.payment-split--text {
-  font-size: 2.6rem;
-  height: 60px;
-}
-
-.payment-total--text {
-  font-size: 4rem;
-}
-.payment-total--button {
-  padding: 10px 15px;
-  height: 74px;
-  text-transform: none;
-  font-size: 3rem;
-  color: rgba(0,0,0,0.87);
-}
-
-.payment-merger--icon {
-  clear: both;
-  width: 60px;
-  height: 60px;
-  margin-top: 10px;
-  vertical-align: bottom;
-}
-
-.btn:hover:before {
-  opacity: 1;
-}
-
-.btn:hover:before {
-  opacity: 0.85;
-}
-
-.btn:focus:before {
-  opacity: 1;
-}
-
-.btn:focus:before {
-  opacity: 0.85;
-}
-
-.btn:before {
-    content: '';
-    opacity: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    transition: opacity .2s;
-    z-index: -1;
-}
-
-
-@media only screen and (min-width: 375px) {
-  .hide-above-very-small-375 {
-    display: none;
-  }
-}
-@media only screen and (max-width: 374px) {
-  .hide-on-very-small-375-only {
-    display: none;
-  }
-}
-
-@media only screen and (min-width: 400px) {
-  .hide-above-very-small-400 {
-    display: none;
-  }
-}
-@media only screen and (max-width: 399px) {
-  .hide-on-very-small-400-only {
-    display: none;
-  }
+  font-size: tiny;
 }
