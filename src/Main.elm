@@ -517,7 +517,7 @@ companySize merger =
         [ p [ class "merger--hint" ] [ text "Select the size of the merged company" ]
         , node "div"
             [ class "size--list" ]
-            (List.map sizeSelection (List.range 1 25))
+            (List.map sizeSelection (List.range 1 35))
         ]
 
 
