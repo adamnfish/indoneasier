@@ -302,114 +302,108 @@ welcome assets =
         , div [ class "doc-card" ]
             [ div [ class "doc-card-title" ] [ h2 [] [ text "Game phases" ] ]
             , div [ class "doc-card-content" ]
-                [ dl
-                    [ class "dl__docs" ]
-                    [ dt [] [ text "1. New era" ]
-                    , dd []
-                        [ text "Occurs when at most one company type remains, "
-                        , text "and at game start."
-                        , br [] []
-                        , text "- remove any remaining companies"
-                        , br [] []
-                        , text "- players place next era's city"
-                        , br [] []
-                        , text "- distribute next era's companies"
-                        , br [] []
-                        , text "Game ends if "
-                        , strong [] [ text "era c" ]
-                        , text " ends."
+                [ div [ class "phase" ]
+                    [ div [ class "phase-header" ]
+                        [ span [ class "phase-number" ] [ text "1" ]
+                        , span [ class "phase-name" ] [ text "New era" ]
                         ]
-                    , dt [] [ text "2. Turn order" ]
-                    , dd []
-                        [ text "One bid per player, in previous turn order. "
-                        , text "New turn order is bid amount ranked, tied players maintain their respective order."
-                        , br [] []
-                        , text "Player bids are multiplied before ranking according to their "
-                        , strong [] [ text "turn order bid" ]
-                        , text " R&D level."
-                        , br [] []
-                        , icon "info" "tiny"
-                        , text " Pay bids into player banks."
+                    , ul [ class "phase-rules" ]
+                        [ li [] [ text "Occurs when at most one company type remains, and at game start" ]
+                        , li [] [ text "Remove any remaining companies" ]
+                        , li [] [ text "Players place next era's city" ]
+                        , li [] [ text "Distribute next era's companies" ]
+                        , li [] [ text "Game ends if ", strong [] [ text "era c" ], text " ends" ]
                         ]
-                    , dt [] [ text "3. Mergers" ]
-                    , dd []
-                        [ text "In turn order, players may announce a merger between any 2 companies "
-                        , text "until all players are unwilling or unable to announce another."
-                        , br [] []
-                        , text "Number of deeds in an announced merger is limited by player's "
-                        , strong [] [ text "merger" ]
-                        , text " R&D level."
-                        , br [] []
-                        , text "Announcing player must be able to hold the resulting company "
-                        , text "(i.e. owns one of the companies or has a free slot)."
-                        , br [] []
-                        , text "All players that could hold the resulting company may bid."
-                        , br [] []
-                        , icon "info" "tiny"
-                        , text " Merging rice & spice into siap faji cannot be done in "
-                        , strong [] [ text "era a" ]
-                        , text "."
-                        , br [] []
-                        , icon "info" "tiny"
-                        , text " After creating siap faji from rice & spice remove half (round up) land areas."
+                    ]
+                , div [ class "phase" ]
+                    [ div [ class "phase-header" ]
+                        [ span [ class "phase-number" ] [ text "2" ]
+                        , span [ class "phase-name" ] [ text "Turn order" ]
                         ]
-                    , dt [] [ text "4. Acquisitions" ]
-                    , dd []
-                        [ text "In turn order, players may acquire an available company "
-                        , text "until all companies are taken, "
-                        , text "or players are unwilling or unable to take another company."
-                        , br [] []
-                        , text "Players are limited by their "
-                        , strong [] [ text "slots" ]
-                        , text " R&D level."
-                        , br [] []
-                        , icon "info" "tiny"
-                        , text " Merged companies of any size take up only one slot."
+                    , ul [ class "phase-rules" ]
+                        [ li [] [ text "One bid per player, in previous turn order" ]
+                        , li [] [ text "New turn order ranked by bid amount; tied players maintain their respective order" ]
+                        , li [] [ text "Player bids are multiplied before ranking according to their ", strong [] [ text "turn order bid" ], text " R&D level" ]
                         ]
-                    , dt [] [ text "5. Research & Development" ]
-                    , dd []
-                        [ text "In turn order, players move marker one step forward on a single track."
-                        , br [] []
-                        , icon "info" "tiny"
-                        , text " May upgrade another player's hull size."
+                    , div [ class "phase-callout" ]
+                        [ span [] [ text "Pay bids into player banks" ]
                         ]
-                    , dt [] [ text "6. Operations" ]
-                    , dd []
-                        [ text "In turn order, players operate one of their companies "
-                        , text "until all companies have operated."
-                        , br [] []
-                        , text "Goods companies:"
-                        , br [] []
-                        , text "- ship goods to cities with capacity"
-                        , br [] []
-                        , text "- each good is sold on a chain of ships from a single company"
-                        , br [] []
-                        , text "- pay shipping costs to owners"
-                        , br [] []
-                        , text "- must ship as much as possible"
-                        , br [] []
-                        , text "- must expand for free if all goods sold, or may pay to expand"
-                        , br [] []
-                        , text "Shipping companies:"
-                        , br [] []
-                        , text "- may expand for free, up to company's era capacity"
-                        , br [] []
-                        , text "Expansions are limited by players' "
-                        , strong [] [ text "expansion" ]
-                        , text " R&D level."
-                        , br [] []
-                        , icon "info" "tiny"
-                        , text " Double earnings in the final round."
+                    ]
+                , div [ class "phase" ]
+                    [ div [ class "phase-header" ]
+                        [ span [ class "phase-number" ] [ text "3" ]
+                        , span [ class "phase-name" ] [ text "Mergers" ]
                         ]
-                    , dt [] [ text "7. City growth" ]
-                    , dd []
-                        [ text "Cities grow if they were full of all available goods types." ]
+                    , ul [ class "phase-rules" ]
+                        [ li [] [ text "In turn order, players may announce a merger between any 2 companies until all players are unwilling or unable" ]
+                        , li [] [ text "Size of the announced merger is limited by the announcing player's ", strong [] [ text "merger" ], text " R&D level" ]
+                        , li [] [ text "Announcing player must be able to hold the resulting company" ]
+                        , li [] [ text "All players that could hold the resulting company may bid" ]
+                        ]
+                    , div [ class "phase-callouts" ]
+                        [ div [ class "phase-callout" ]
+                            [ text "Merging rice & spice into siap faji cannot be done in "
+                            , strong [] [ text "era a" ]
+                            ]
+                        , div [ class "phase-callout" ]
+                            [ text "After creating siap faji from rice & spice, remove half (round up) land areas"
+                            ]
+                        ]
+                    ]
+                , div [ class "phase" ]
+                    [ div [ class "phase-header" ]
+                        [ span [ class "phase-number" ] [ text "4" ]
+                        , span [ class "phase-name" ] [ text "Acquisitions" ]
+                        ]
+                    , ul [ class "phase-rules" ]
+                        [ li [] [ text "In turn order, players may acquire an available company until all are taken or players are unwilling or unable" ]
+                        , li [] [ text "Players are limited by their ", strong [] [ text "slots" ], text " R&D level" ]
+                        ]
+                    , div [ class "phase-callout" ]
+                        [ text "Merged companies of any size take up only one slot"
+                        ]
+                    ]
+                , div [ class "phase" ]
+                    [ div [ class "phase-header" ]
+                        [ span [ class "phase-number" ] [ text "5" ]
+                        , span [ class "phase-name" ] [ text "Research & Development" ]
+                        ]
+                    , ul [ class "phase-rules" ]
+                        [ li [] [ text "In turn order, players move their marker one step forward on a single track" ]
+                        ]
+                    , div [ class "phase-callout" ]
+                        [ text "May upgrade another player's hull size"
+                        ]
+                    ]
+                , div [ class "phase" ]
+                    [ div [ class "phase-header" ]
+                        [ span [ class "phase-number" ] [ text "6" ]
+                        , span [ class "phase-name" ] [ text "Operations" ]
+                        ]
+                    , ul [ class "phase-rules" ]
+                        [ li [] [ text "In turn order, players operate one of their companies until all have operated" ]
+                        , li [] [ strong [] [ text "Goods: " ], text "ship goods to cities with capacity; each good sold on a chain of ships from a single company; pay shipping costs to owners; must ship as much as possible; must expand for free if all goods sold, or may pay to expand" ]
+                        , li [] [ strong [] [ text "Shipping: " ], text "may expand for free, up to company's era capacity" ]
+                        , li [] [ text "Expansions limited by players' ", strong [] [ text "expansion" ], text " R&D level" ]
+                        ]
+                    , div [ class "phase-callout" ]
+                        [ text "Double earnings in the final round"
+                        ]
+                    ]
+                , div [ class "phase phase--last" ]
+                    [ div [ class "phase-header" ]
+                        [ span [ class "phase-number" ] [ text "7" ]
+                        , span [ class "phase-name" ] [ text "City growth" ]
+                        ]
+                    , ul [ class "phase-rules" ]
+                        [ li [] [ text "Cities grow if they were full of all available goods types" ]
+                        ]
                     ]
                 ]
             ]
         , div [ class "doc-card" ]
             [ div [ class "doc-card-title" ] [ h2 [] [ text "R&D tracks" ] ]
-            , div [ class "doc-card-content" ]
+            , div [ class "doc-card-content doc-card-content--padded" ]
                 [ dl
                     [ class "dl__docs" ]
                     [ dt [] [ text "Slots" ]
@@ -438,37 +432,36 @@ welcome assets =
         , div [ class "doc-card" ]
             [ div [ class "doc-card-title" ] [ h2 [] [ text "Goods values" ] ]
             , div [ class "doc-card-content" ]
-                [ dl
-                    []
-                    [ dt [] [ text "Shipping" ]
-                    , dd []
-                        [ em [] [ text "Rp " ]
-                        , text "5 / ship"
+                [ div [ class "goods-values" ]
+                    [ div [ class "goods-row" ]
+                        [ img [ src assets.shipping, class "goods-icon" ] []
+                        , span [ class "goods-name" ] [ text "Shipping" ]
+                        , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "5 / ship" ]
                         ]
-                    , dt [] [ text "Rice" ]
-                    , dd []
-                        [ em [] [ text "Rp " ]
-                        , text "20"
+                    , div [ class "goods-row" ]
+                        [ img [ src assets.rice, class "goods-icon" ] []
+                        , span [ class "goods-name" ] [ text "Rice" ]
+                        , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "20" ]
                         ]
-                    , dt [] [ text "Spice" ]
-                    , dd []
-                        [ em [] [ text "Rp " ]
-                        , text "25"
+                    , div [ class "goods-row" ]
+                        [ img [ src assets.spice, class "goods-icon" ] []
+                        , span [ class "goods-name" ] [ text "Spice" ]
+                        , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "25" ]
                         ]
-                    , dt [] [ text "SiapFaji" ]
-                    , dd []
-                        [ em [] [ text "Rp " ]
-                        , text "35"
+                    , div [ class "goods-row" ]
+                        [ img [ src assets.siapfaji, class "goods-icon" ] []
+                        , span [ class "goods-name" ] [ text "Siap Faji" ]
+                        , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "35" ]
                         ]
-                    , dt [] [ text "Rubber" ]
-                    , dd []
-                        [ em [] [ text "Rp " ]
-                        , text "30"
+                    , div [ class "goods-row" ]
+                        [ img [ src assets.rubber, class "goods-icon" ] []
+                        , span [ class "goods-name" ] [ text "Rubber" ]
+                        , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "30" ]
                         ]
-                    , dt [] [ text "Oil" ]
-                    , dd []
-                        [ em [] [ text "Rp " ]
-                        , text "40"
+                    , div [ class "goods-row" ]
+                        [ img [ src assets.oil, class "goods-icon" ] []
+                        , span [ class "goods-name" ] [ text "Oil" ]
+                        , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "40" ]
                         ]
                     ]
                 ]
@@ -505,11 +498,12 @@ mergerButton assets merger =
 companySizeButton : Merger -> Int -> ( String, Html Msg )
 companySizeButton merger size =
     ( "company-size--" ++ String.fromInt size
-    , a
+    , button
         [ onClick (SelectCount merger (Count size))
-        , class "collection-item"
+        , class "size-item--button"
         ]
-        [ text (String.fromInt size) ]
+        [ span [ class "size-item--number" ] [ text (String.fromInt size) ]
+        ]
     )
 
 
@@ -520,18 +514,10 @@ companySize merger =
             companySizeButton merger
     in
     div [ class "screen" ]
-        [ node "div"
-            [ class "collection with-header collection-links" ]
-            ([ ( "company-size--header"
-               , div
-                    [ class "collection-header" ]
-                    [ h2 [] [ text "Merged company size" ] ]
-               )
-             ]
-                ++ List.map
-                    sizeSelection
-                    (List.range 1 25)
-            )
+        [ p [ class "merger--hint" ] [ text "Select the size of the merged company" ]
+        , node "div"
+            [ class "size--list" ]
+            (List.map sizeSelection (List.range 1 25))
         ]
 
 
@@ -544,69 +530,63 @@ costTable merger (Count count) clickMsg =
         initial =
             count * pricePerItem
     in
-    div []
-        [ node "div"
-            [ class "collection with-header collection-links" ]
-            ([ ( "bid--header"
-               , div
-                    [ class "collection-header" ]
-                    [ h2 [] [ text "Bid amount" ] ]
-               )
-             ]
-                ++ List.map
-                    (\i ->
-                        let
-                            bid =
-                                initial + (i * count)
-                        in
-                        ( "bid--" ++ String.fromInt i
-                        , a
-                            [ onClick (clickMsg (Bid bid))
-                            , class "collection-item"
+    div [ class "screen" ]
+        [ p [ class "merger--hint" ] [ text "Select the winning bid amount" ]
+        , node "div"
+            [ class "bid--list" ]
+            (List.map
+                (\i ->
+                    let
+                        bid =
+                            initial + (i * count)
+                    in
+                    ( "bid--" ++ String.fromInt i
+                    , button
+                        [ onClick (clickMsg (Bid bid))
+                        , class "bid-item--button"
+                        ]
+                        [ span [ class "bid-item--total" ]
+                            [ em [ class "bid-item--currency" ] [ text "Rp" ]
+                            , text (String.fromInt bid)
                             ]
-                            [ em [] [ text "Rp " ]
-                            , b []
-                                [ text (String.fromInt bid) ]
-                            , span
-                                [ class "grey-text" ]
-                                [ text " : "
-                                , text (String.fromInt count)
-                                , text " × "
-                                , text (String.fromInt (bid // count))
-                                , text ""
-                                ]
+                        , span [ class "bid-item--breakdown" ]
+                            [ text (String.fromInt count)
+                            , text " × "
+                            , em [] [ text "Rp" ]
+                            , text (String.fromInt (bid // count))
                             ]
-                        )
+                        ]
                     )
-                    (List.range 0 150)
+                )
+                (List.range 0 150)
             )
         ]
 
 
 companySplit : Merger -> Count -> Bid -> Html Msg
 companySplit merger (Count count) bid =
-    div []
-        [ div [ class "collection with-header collection-links" ]
-            ([ div
-                [ class "collection-header" ]
-                [ h2 []
-                    [ text "Calculate payments" ]
-                ]
-             , a
+    div [ class "screen" ]
+        [ p [ class "merger--hint" ] [ text "Select the ownership split" ]
+        , div [ class "split--list" ]
+            ([ button
                 [ onClick (SelectSplit merger (Count count) bid SingleCompany)
-                , class "collection-item"
+                , class "split-item--button"
                 ]
-                [ text "Single owner" ]
+                [ span [ class "split-item--ratio" ] [ text "Single" ]
+                , span [ class "split-item--single-label" ] [ text "owner" ]
+                ]
              ]
                 ++ List.map
                     (\i ->
-                        a
+                        button
                             [ onClick (SelectSplit merger (Count count) bid (Split i (count - i)))
-                            , class "collection-item"
+                            , class "split-item--button"
                             ]
-                            [ text (String.fromInt i)
-                            , text " / "
-                            , text (String.fromInt (count - i))
+                            [ span [ class "split-item--ratio" ]
+                                [ text (String.fromInt i)
+                                , span [ class "split-item--divider" ] [ text "/" ]
+                                , text (String.fromInt (count - i))
+                                ]
                             ]
                     )
                     (List.range 1 (count // 2))
@@ -616,93 +596,61 @@ companySplit merger (Count count) bid =
 
 payments : Assets -> Merger -> Count -> Bid -> Split -> Html Msg
 payments assets merger (Count count) (Bid bid) split =
-    div []
-        (case split of
-            SingleCompany ->
-                [ card "TODO"
-                    [ p
-                        [ class "payment-total--text hide-on-very-small-400-only" ]
-                        [ icon "swap_horiz" "large left" ]
-                    , a
-                        [ class "payment-total--button waves-effect waves-light btn btn-large blue-grey lighten-3"
-                        , onClick (ChangeBid merger (Count count) (Bid bid) split)
+    let
+        pricePerDeed =
+            bid // count
+
+        mergerIcon =
+            img
+                [ src (iconUrl assets merger)
+                , class "payment-merger--icon"
+                ]
+                []
+
+        paymentRow amount dealsCount =
+            div [ class "payment-row" ]
+                [ div [ class "payment-row--breakdown" ]
+                    [ mergerIcon
+                    , span [ class "payment-row--deeds" ]
+                        [ text "× "
+                        , text (String.fromInt dealsCount)
                         ]
-                        [ icon "edit" "right large"
+                    , span [ class "payment-row--per-deed" ]
+                        [ text "("
                         , em [] [ text "Rp " ]
-                        , text (String.fromInt bid)
+                        , text (String.fromInt pricePerDeed)
+                        , text " each)"
                         ]
                     ]
-                , card "TODO"
-                    [ p
-                        [ class "payment-split--text" ]
-                        [ icon "person_add" "medium right"
-                        , em [] [ text "Rp " ]
-                        , b [] [ text (String.fromInt bid) ]
-                        ]
-                    , p []
-                        [ text "Single owner receives the full bid amount" ]
+                , div [ class "payment-row--amount" ]
+                    [ em [ class "payment-row--currency" ] [ text "Rp" ]
+                    , text (String.fromInt amount)
                     ]
                 ]
+    in
+    div [ class "screen" ]
+        [ button
+            [ class "payment-total"
+            , onClick (ChangeBid merger (Count count) (Bid bid) split)
+            ]
+            [ div [ class "payment-total--label" ] [ text "Total bid" ]
+            , div [ class "payment-total--amount" ]
+                [ em [ class "payment-total--currency" ] [ text "Rp" ]
+                , text (String.fromInt bid)
+                ]
+            , div [ class "payment-total--hint" ] [ text "tap to change" ]
+            ]
+        , case split of
+            SingleCompany ->
+                div [ class "payment-rows" ]
+                    [ paymentRow bid count ]
 
             Split player1Count player2Count ->
-                let
-                    player1 =
-                        (bid // count) * player1Count
-
-                    player2 =
-                        (bid // count) * player2Count
-                in
-                [ card "TODO"
-                    [ p
-                        [ class "payment-total--text hide-on-very-small-400-only" ]
-                        [ icon "swap_horiz" "large left" ]
-                    , a
-                        [ class "payment-total--button waves-effect waves-light btn btn-large blue-grey lighten-3"
-                        , onClick (ChangeBid merger (Count count) (Bid bid) split)
-                        ]
-                        [ icon "edit" "right large"
-                        , em [] [ text "Rp " ]
-                        , text (String.fromInt bid)
-                        ]
+                div [ class "payment-rows" ]
+                    [ paymentRow (pricePerDeed * player1Count) player1Count
+                    , paymentRow (pricePerDeed * player2Count) player2Count
                     ]
-                , card "TODO"
-                    [ p
-                        [ class "payment-split--text" ]
-                        [ icon "person_add" "medium right"
-                        , em [] [ text "Rp " ]
-                        , b [] [ text (String.fromInt player1) ]
-                        ]
-                    , p
-                        [ class "payment-split--text" ]
-                        [ img
-                            [ src (iconUrl assets merger)
-                            , class "payment-merger--icon z-depth-1"
-                            ]
-                            []
-                        , text " × "
-                        , text (String.fromInt player1Count)
-                        ]
-                    ]
-                , card "TODO"
-                    [ p
-                        [ class "payment-split--text" ]
-                        [ icon "person_add" "medium right"
-                        , em [] [ text "Rp " ]
-                        , b [] [ text (String.fromInt player2) ]
-                        ]
-                    , p
-                        [ class "payment-split--text" ]
-                        [ img
-                            [ src (iconUrl assets merger)
-                            , class "payment-merger--icon z-depth-1"
-                            ]
-                            []
-                        , text " × "
-                        , text (String.fromInt player2Count)
-                        ]
-                    ]
-                ]
-        )
+        ]
 
 
 card : String -> List (Html Msg) -> Html Msg
