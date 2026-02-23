@@ -133,7 +133,60 @@ footer {
   color: rgba(0,0,0,0.87);
 }
 
+/* Documentation layout */
+
+.docs-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.docs-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Medium: R&D and Goods side-by-side, phases full width above */
+@media (min-width: 540px) {
+  .docs-sidebar {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .docs-sidebar > * {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+/* Wide: phases on the left, R&D + Goods stacked on the right */
+@media (min-width: 910px) {
+  .docs-layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .docs-layout > .doc-card {
+    flex: 3 1 0;
+    min-width: 0;
+  }
+
+  .docs-sidebar {
+    flex: 2 1 0;
+    flex-direction: column;
+  }
+
+  .docs-sidebar > * {
+    flex: none;
+  }
+}
+
 /* Documentation cards */
+
+.docs-sidebar > .doc-card {
+  width: 100%;
+}
 
 .doc-card {
   background-color: #f5f2e8;
