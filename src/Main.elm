@@ -728,6 +728,11 @@ payments assets merger (Count count) (Bid bid) split =
                     [ paymentRow (pricePerDeed * player1Count) player1Count
                     , paymentRow (pricePerDeed * player2Count) player2Count
                     ]
+        , button
+            [ class "finish-merger--button"
+            , onClick GoHome
+            ]
+            [ text "Finish merger" ]
         ]
 
 
