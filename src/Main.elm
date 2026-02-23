@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, a, b, br, button, dd, div, dl, dt, em, footer, h2, i, img, li, main_, nav, p, span, strong, text, ul)
+import Html exposing (Html, a, button, dd, div, dl, dt, em, footer, h2, img, li, main_, nav, p, span, strong, text, ul)
 import Html.Attributes exposing (class, href, src)
 import Html.Events exposing (onClick)
 import Html.Keyed exposing (node)
@@ -252,7 +252,7 @@ view model =
                 [ text "Indonesia" ]
             ]
         , main_
-            [ class "container" ]
+            []
             [ case model.lifecycle of
                 Welcome ->
                     welcome model.assets
@@ -263,7 +263,7 @@ view model =
                 CostTable merger count ->
                     costTable merger count (SelectBid merger count)
 
-                AlterCostTable merger count prevBid split ->
+                AlterCostTable merger count _ split ->
                     costTable merger count (UpdateBid merger count split)
 
                 CompanySplit merger count bid ->
@@ -324,9 +324,7 @@ welcome assets =
                         [ li [] [ text "One bid per player, in previous turn order" ]
                         , li [] [ text "New turn order ranked by bid amount; tied players maintain their respective order" ]
                         , li [] [ text "Player bids are multiplied before ranking according to their turn order bid R&D level" ]
-                        ]
-                    , div [ class "phase-callout" ]
-                        [ span [] [ text "Pay bids into player banks" ]
+                        , li [ class "phase-callout" ] [ text "Pay bids into player banks" ]
                         ]
                     ]
                 , div [ class "phase" ]
@@ -336,18 +334,14 @@ welcome assets =
                         ]
                     , ul [ class "phase-rules" ]
                         [ li [] [ text "In turn order, players may announce a merger between any 2 companies until all players are unwilling or unable" ]
-                        , li [] [ text "Size of the announced merger is limited by the announcing player's merger R&D level" ]
-                        , li [] [ text "Announcing player must be able to hold the resulting company" ]
-                        , li [] [ text "All players that could hold the resulting company may bid" ]
-                        ]
-                    , div [ class "phase-callouts" ]
-                        [ div [ class "phase-callout" ]
+                        , li [ class "phase-callout" ]
                             [ text "Merging rice & spice into siap faji cannot be done in "
                             , strong [] [ text "era a" ]
                             ]
-                        , div [ class "phase-callout" ]
-                            [ text "After creating siap faji from rice & spice, remove half (round up) land areas"
-                            ]
+                        , li [] [ text "Size of the announced merger is limited by the announcing player's merger R&D level" ]
+                        , li [] [ text "Announcing player must be able to hold the resulting company" ]
+                        , li [] [ text "All players that could hold the resulting company may bid" ]
+                        , li [ class "phase-callout" ] [ text "After creating siap faji from rice & spice, remove half (round up) land areas" ]
                         ]
                     ]
                 , div [ class "phase" ]
@@ -358,9 +352,7 @@ welcome assets =
                     , ul [ class "phase-rules" ]
                         [ li [] [ text "In turn order, players may acquire an available company until all are taken or players are unwilling or unable" ]
                         , li [] [ text "Players are limited by their slots R&D level" ]
-                        ]
-                    , div [ class "phase-callout" ]
-                        [ text "Merged companies of any size take up only one slot"
+                        , li [ class "phase-callout" ] [ text "Merged companies of any size take up only one slot" ]
                         ]
                     ]
                 , div [ class "phase" ]
@@ -370,9 +362,7 @@ welcome assets =
                         ]
                     , ul [ class "phase-rules" ]
                         [ li [] [ text "In turn order, players move their marker one step forward on a single track" ]
-                        ]
-                    , div [ class "phase-callout" ]
-                        [ text "May upgrade another player's hull size"
+                        , li [ class "phase-callout" ] [ text "May upgrade another player's hull size" ]
                         ]
                     ]
                 , div [ class "phase" ]
@@ -385,9 +375,7 @@ welcome assets =
                         , li [] [ strong [] [ text "Goods: " ], text "ship goods to cities with capacity; each good sold on a chain of ships from a single company; pay shipping costs to owners; must ship as much as possible; must expand for free if all goods sold, or may pay to expand" ]
                         , li [] [ strong [] [ text "Shipping: " ], text "may expand for free, up to company's era capacity" ]
                         , li [] [ text "Expansions limited by players' expansion R&D level" ]
-                        ]
-                    , div [ class "phase-callout" ]
-                        [ text "Double earnings in the final round"
+                        , li [ class "phase-callout" ] [ text "Double earnings in the final round" ]
                         ]
                     ]
                 , div [ class "phase phase--last" ]
@@ -437,37 +425,35 @@ welcome assets =
         , div [ class "doc-card" ]
             [ div [ class "doc-card-title" ] [ h2 [] [ text "Goods values" ] ]
             , div [ class "doc-card-content" ]
-                [ div [ class "goods-values" ]
-                    [ div [ class "goods-row" ]
-                        [ img [ src assets.shipping, class "goods-icon" ] []
-                        , span [ class "goods-name" ] [ text "Shipping" ]
-                        , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "5 / ship" ]
-                        ]
-                    , div [ class "goods-row" ]
-                        [ img [ src assets.rice, class "goods-icon" ] []
-                        , span [ class "goods-name" ] [ text "Rice" ]
-                        , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "20" ]
-                        ]
-                    , div [ class "goods-row" ]
-                        [ img [ src assets.spice, class "goods-icon" ] []
-                        , span [ class "goods-name" ] [ text "Spice" ]
-                        , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "25" ]
-                        ]
-                    , div [ class "goods-row" ]
-                        [ img [ src assets.siapfaji, class "goods-icon" ] []
-                        , span [ class "goods-name" ] [ text "Siap Faji" ]
-                        , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "35" ]
-                        ]
-                    , div [ class "goods-row" ]
-                        [ img [ src assets.rubber, class "goods-icon" ] []
-                        , span [ class "goods-name" ] [ text "Rubber" ]
-                        , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "30" ]
-                        ]
-                    , div [ class "goods-row" ]
-                        [ img [ src assets.oil, class "goods-icon" ] []
-                        , span [ class "goods-name" ] [ text "Oil" ]
-                        , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "40" ]
-                        ]
+                [ div [ class "goods-row" ]
+                    [ img [ src assets.shipping, class "goods-icon" ] []
+                    , span [ class "goods-name" ] [ text "Shipping" ]
+                    , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "5 / ship" ]
+                    ]
+                , div [ class "goods-row" ]
+                    [ img [ src assets.rice, class "goods-icon" ] []
+                    , span [ class "goods-name" ] [ text "Rice" ]
+                    , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "20" ]
+                    ]
+                , div [ class "goods-row" ]
+                    [ img [ src assets.spice, class "goods-icon" ] []
+                    , span [ class "goods-name" ] [ text "Spice" ]
+                    , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "25" ]
+                    ]
+                , div [ class "goods-row" ]
+                    [ img [ src assets.siapfaji, class "goods-icon" ] []
+                    , span [ class "goods-name" ] [ text "Siap Faji" ]
+                    , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "35" ]
+                    ]
+                , div [ class "goods-row" ]
+                    [ img [ src assets.rubber, class "goods-icon" ] []
+                    , span [ class "goods-name" ] [ text "Rubber" ]
+                    , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "30" ]
+                    ]
+                , div [ class "goods-row" ]
+                    [ img [ src assets.oil, class "goods-icon" ] []
+                    , span [ class "goods-name" ] [ text "Oil" ]
+                    , span [ class "goods-price" ] [ em [] [ text "Rp " ], text "40" ]
                     ]
                 ]
             ]
@@ -656,29 +642,6 @@ payments assets merger (Count count) (Bid bid) split =
                     , paymentRow (pricePerDeed * player2Count) player2Count
                     ]
         ]
-
-
-card : String -> List (Html Msg) -> Html Msg
-card heading contents =
-    div
-        []
-        [ div
-            [ class "card" ]
-            [ div
-                [ class "card-title" ]
-                [ h2 [] [ text heading ] ]
-            , div
-                [ class "card-content" ]
-                contents
-            ]
-        ]
-
-
-icon : String -> String -> Html msg
-icon iconName cssClass =
-    i
-        [ class ("material-icons " ++ cssClass) ]
-        [ text iconName ]
 
 
 

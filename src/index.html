@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,25 +20,18 @@
 <body>
     <div id="root"></div>
     <noscript>
-        <div class="container">
-            <div class="row">
-                <div class="col s12">
-                    <br />
-                    <br />
-                    <br />
-                    <div class="card">
-                        <div class="card-content">
-                            <h2>JavaScript required</h2>
-                            <p>
-                                Indoneasier is an interactive player aid and requires JavaScript.
-                            </p>
-                            <p>
-                                Please enable JavaScript in your browser's settings.
-                            </p>
-                        </div>
-                    </div>
+        <div class="noscript-app">
+            <nav>
+                <div class="nav-title">Indon<strong>easier</strong></div>
+                <div class="nav-bg"></div>
+            </nav>
+            <main class="noscript-main">
+                <div class="noscript-box">
+                    <p>Indoneasier is an interactive player aid and requires JavaScript.</p>
+                    <p>Please enable JavaScript in your browser's settings.</p>
                 </div>
-            </div>
+            </main>
+            <footer></footer>
         </div>
     </noscript>
     <script type="module" src="./index.js"></script>
