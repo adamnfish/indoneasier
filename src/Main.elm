@@ -12,7 +12,7 @@ import Ports exposing (scrollTop)
 ---- MODEL ----
 
 
-type Merger
+type MergerType
     = Shipping
     | Rice
     | Spice
@@ -53,11 +53,11 @@ type alias Flags =
 
 type Lifecycle
     = Welcome
-    | CompanySize Merger
-    | CostTable Merger Count
-    | CompanySplit Merger Count Bid
-    | Payments Merger Count Bid Split
-    | AlterCostTable Merger Count Bid Split
+    | CompanySize MergerType
+    | CostTable MergerType Count
+    | CompanySplit MergerType Count Bid
+    | Payments MergerType Count Bid Split
+    | AlterCostTable MergerType Count Bid Split
 
 
 type alias Model =
@@ -75,7 +75,7 @@ init flags =
     )
 
 
-minPrice : Merger -> Int
+minPrice : MergerType -> Int
 minPrice merger =
     case merger of
         Shipping ->
@@ -100,7 +100,7 @@ minPrice merger =
             40
 
 
-mergerName : Merger -> String
+mergerName : MergerType -> String
 mergerName merger =
     case merger of
         Shipping ->
@@ -125,7 +125,7 @@ mergerName merger =
             "Oil"
 
 
-mergerClassName : Merger -> String
+mergerClassName : MergerType -> String
 mergerClassName merger =
     case merger of
         Shipping ->
@@ -150,7 +150,7 @@ mergerClassName merger =
             "oil"
 
 
-iconUrl : Assets -> Merger -> String
+iconUrl : Assets -> MergerType -> String
 iconUrl assets merger =
     case merger of
         Shipping ->
@@ -180,12 +180,12 @@ iconUrl assets merger =
 
 
 type Msg
-    = SelectMerger Merger
-    | SelectCount Merger Count
-    | SelectBid Merger Count Bid
-    | ChangeBid Merger Count Bid Split
-    | UpdateBid Merger Count Split Bid
-    | SelectSplit Merger Count Bid Split
+    = SelectMerger MergerType
+    | SelectCount MergerType Count
+    | SelectBid MergerType Count Bid
+    | ChangeBid MergerType Count Bid Split
+    | UpdateBid MergerType Count Split Bid
+    | SelectSplit MergerType Count Bid Split
     | GoHome
 
 
@@ -258,16 +258,16 @@ view model =
                     welcome model.assets
 
                 CompanySize merger ->
-                    companySize merger
+                    companySize model.assets merger
 
                 CostTable merger count ->
-                    costTable merger count (SelectBid merger count)
+                    costTable model.assets merger count (SelectBid merger count)
 
                 AlterCostTable merger count _ split ->
-                    costTable merger count (UpdateBid merger count split)
+                    costTable model.assets merger count (UpdateBid merger count split)
 
                 CompanySplit merger count bid ->
-                    companySplit merger count bid
+                    companySplit model.assets merger count bid
 
                 Payments merger count bid split ->
                     payments model.assets merger count bid split
@@ -464,7 +464,7 @@ welcome assets =
         ]
 
 
-mergerButton : Assets -> Merger -> ( String, Html Msg )
+mergerButton : Assets -> MergerType -> ( String, Html Msg )
 mergerButton assets merger =
     let
         name =
@@ -490,7 +490,7 @@ mergerButton assets merger =
     )
 
 
-companySizeButton : Merger -> Int -> ( String, Html Msg )
+companySizeButton : MergerType -> Int -> ( String, Html Msg )
 companySizeButton merger size =
     ( "company-size--" ++ String.fromInt size
     , button
@@ -502,22 +502,95 @@ companySizeButton merger size =
     )
 
 
-companySize : Merger -> Html Msg
-companySize merger =
+breadcrumbs : List (Html Msg) -> Html Msg
+breadcrumbs items =
+    div [ class "breadcrumbs" ] items
+
+
+breadcrumbButton : Msg -> List (Html Msg) -> Html Msg
+breadcrumbButton msg content =
+    button
+        [ class "breadcrumb--button"
+        , onClick msg
+        ]
+        content
+
+
+breadcrumbPlaceholder : Html Msg
+breadcrumbPlaceholder =
+    span [ class "breadcrumb--placeholder" ] [ text "…" ]
+
+
+mergerBreadcrumb : Assets -> MergerType -> Html Msg
+mergerBreadcrumb assets merger =
+    button
+        [ class "breadcrumb--button breadcrumb--button-merger"
+        , onClick GoHome
+        ]
+        [ img
+            [ src (iconUrl assets merger)
+            , class "breadcrumb--icon"
+            ]
+            []
+        , span [ class "breadcrumb--label breadcrumb--icon-label" ] [ text (mergerName merger) ]
+        ]
+
+
+countBreadcrumb : MergerType -> Count -> Html Msg
+countBreadcrumb merger (Count count) =
+    breadcrumbButton (SelectMerger merger)
+        [ span [ class "breadcrumb--label" ]
+            [ text "Size "
+            , strong [] [ text (String.fromInt count) ]
+            ]
+        ]
+
+
+bidBreadcrumb : MergerType -> Count -> Bid -> Msg -> Html Msg
+bidBreadcrumb _ _ (Bid bid) msg =
+    breadcrumbButton msg
+        [ span [ class "breadcrumb--label" ]
+            [ em [ class "breadcrumb--currency" ] [ text "Rp " ]
+            , strong [] [ text (String.fromInt bid) ]
+            ]
+        ]
+
+
+splitBreadcrumb : MergerType -> Count -> Bid -> Split -> Html Msg
+splitBreadcrumb merger count bid split =
+    let
+        label =
+            case split of
+                SingleCompany ->
+                    "Single owner"
+
+                Split a b ->
+                    String.fromInt a ++ " / " ++ String.fromInt b
+    in
+    breadcrumbButton (SelectBid merger count bid)
+        [ span [ class "breadcrumb--label" ] [ text label ] ]
+
+
+companySize : Assets -> MergerType -> Html Msg
+companySize assets merger =
     let
         sizeSelection =
             companySizeButton merger
     in
     div [ class "screen" ]
-        [ p [ class "merger--hint" ] [ text "Select the size of the merged company" ]
+        [ breadcrumbs
+            [ mergerBreadcrumb assets merger
+            , breadcrumbPlaceholder
+            ]
+        , p [ class "merger--hint" ] [ text "Select the size of the merged company" ]
         , node "div"
             [ class "size--list" ]
-            (List.map sizeSelection (List.range 1 35))
+            (List.map sizeSelection (List.range 1 36))
         ]
 
 
-costTable : Merger -> Count -> (Bid -> Msg) -> Html Msg
-costTable merger (Count count) clickMsg =
+costTable : Assets -> MergerType -> Count -> (Bid -> Msg) -> Html Msg
+costTable assets merger (Count count) clickMsg =
     let
         pricePerItem =
             minPrice merger
@@ -526,7 +599,12 @@ costTable merger (Count count) clickMsg =
             count * pricePerItem
     in
     div [ class "screen" ]
-        [ p [ class "merger--hint" ] [ text "Select the winning bid amount" ]
+        [ breadcrumbs
+            [ mergerBreadcrumb assets merger
+            , countBreadcrumb merger (Count count)
+            , breadcrumbPlaceholder
+            ]
+        , p [ class "merger--hint" ] [ text "Select the winning bid amount" ]
         , node "div"
             [ class "bid--list" ]
             (List.map
@@ -558,10 +636,16 @@ costTable merger (Count count) clickMsg =
         ]
 
 
-companySplit : Merger -> Count -> Bid -> Html Msg
-companySplit merger (Count count) bid =
+companySplit : Assets -> MergerType -> Count -> Bid -> Html Msg
+companySplit assets merger (Count count) bid =
     div [ class "screen" ]
-        [ p [ class "merger--hint" ] [ text "Select the ownership split" ]
+        [ breadcrumbs
+            [ mergerBreadcrumb assets merger
+            , countBreadcrumb merger (Count count)
+            , bidBreadcrumb merger (Count count) bid (SelectCount merger (Count count))
+            , breadcrumbPlaceholder
+            ]
+        , p [ class "merger--hint" ] [ text "Select the ownership split" ]
         , div [ class "split--list" ]
             ([ button
                 [ onClick (SelectSplit merger (Count count) bid SingleCompany)
@@ -589,7 +673,7 @@ companySplit merger (Count count) bid =
         ]
 
 
-payments : Assets -> Merger -> Count -> Bid -> Split -> Html Msg
+payments : Assets -> MergerType -> Count -> Bid -> Split -> Html Msg
 payments assets merger (Count count) (Bid bid) split =
     let
         pricePerDeed =
@@ -624,16 +708,11 @@ payments assets merger (Count count) (Bid bid) split =
                 ]
     in
     div [ class "screen" ]
-        [ button
-            [ class "payment-total"
-            , onClick (ChangeBid merger (Count count) (Bid bid) split)
-            ]
-            [ div [ class "payment-total--label" ] [ text "Total bid" ]
-            , div [ class "payment-total--amount" ]
-                [ em [ class "payment-total--currency" ] [ text "Rp" ]
-                , text (String.fromInt bid)
-                ]
-            , div [ class "payment-total--hint" ] [ text "tap to change" ]
+        [ breadcrumbs
+            [ mergerBreadcrumb assets merger
+            , countBreadcrumb merger (Count count)
+            , bidBreadcrumb merger (Count count) (Bid bid) (ChangeBid merger (Count count) (Bid bid) split)
+            , splitBreadcrumb merger (Count count) (Bid bid) split
             ]
         , case split of
             SingleCompany ->
