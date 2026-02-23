@@ -54,10 +54,9 @@ type alias Flags =
 type Lifecycle
     = Welcome
     | CompanySize MergerType
-    | CostTable MergerType Count
-    | CompanySplit MergerType Count Bid
+    | CompanySplit MergerType Count
+    | CostTable MergerType Count Split
     | Payments MergerType Count Bid Split
-    | AlterCostTable MergerType Count Bid Split
 
 
 type alias Model =
@@ -182,10 +181,8 @@ iconUrl assets merger =
 type Msg
     = SelectMerger MergerType
     | SelectCount MergerType Count
-    | SelectBid MergerType Count Bid
-    | ChangeBid MergerType Count Bid Split
-    | UpdateBid MergerType Count Split Bid
-    | SelectSplit MergerType Count Bid Split
+    | SelectSplit MergerType Count Split
+    | SelectBid MergerType Count Split Bid
     | GoHome
 
 
@@ -198,26 +195,16 @@ update msg model =
             )
 
         SelectCount merger count ->
-            ( { model | lifecycle = CostTable merger count }
+            ( { model | lifecycle = CompanySplit merger count }
             , scrollTop ()
             )
 
-        SelectBid merger count bid ->
-            ( { model | lifecycle = CompanySplit merger count bid }
+        SelectSplit merger count split ->
+            ( { model | lifecycle = CostTable merger count split }
             , scrollTop ()
             )
 
-        ChangeBid merger count bid split ->
-            ( { model | lifecycle = AlterCostTable merger count bid split }
-            , scrollTop ()
-            )
-
-        UpdateBid merger count split bid ->
-            ( { model | lifecycle = Payments merger count bid split }
-            , scrollTop ()
-            )
-
-        SelectSplit merger count bid split ->
+        SelectBid merger count split bid ->
             ( { model | lifecycle = Payments merger count bid split }
             , scrollTop ()
             )
@@ -260,14 +247,11 @@ view model =
                 CompanySize merger ->
                     companySize model.assets merger
 
-                CostTable merger count ->
-                    costTable model.assets merger count (SelectBid merger count)
+                CompanySplit merger count ->
+                    companySplit model.assets merger count
 
-                AlterCostTable merger count _ split ->
-                    costTable model.assets merger count (UpdateBid merger count split)
-
-                CompanySplit merger count bid ->
-                    companySplit model.assets merger count bid
+                CostTable merger count split ->
+                    costTable model.assets merger count split
 
                 Payments merger count bid split ->
                     payments model.assets merger count bid split
@@ -546,18 +530,8 @@ countBreadcrumb merger (Count count) =
         ]
 
 
-bidBreadcrumb : MergerType -> Count -> Bid -> Msg -> Html Msg
-bidBreadcrumb _ _ (Bid bid) msg =
-    breadcrumbButton msg
-        [ span [ class "breadcrumb--label" ]
-            [ em [ class "breadcrumb--currency" ] [ text "Rp " ]
-            , strong [] [ text (String.fromInt bid) ]
-            ]
-        ]
-
-
-splitBreadcrumb : MergerType -> Count -> Bid -> Split -> Html Msg
-splitBreadcrumb merger count bid split =
+splitBreadcrumb : MergerType -> Count -> Split -> Html Msg
+splitBreadcrumb merger count split =
     let
         label =
             case split of
@@ -567,8 +541,18 @@ splitBreadcrumb merger count bid split =
                 Split a b ->
                     String.fromInt a ++ " / " ++ String.fromInt b
     in
-    breadcrumbButton (SelectBid merger count bid)
+    breadcrumbButton (SelectCount merger count)
         [ span [ class "breadcrumb--label" ] [ text label ] ]
+
+
+bidBreadcrumb : MergerType -> Count -> Split -> Bid -> Html Msg
+bidBreadcrumb merger count split (Bid bid) =
+    breadcrumbButton (SelectSplit merger count split)
+        [ span [ class "breadcrumb--label" ]
+            [ em [ class "breadcrumb--currency" ] [ text "Rp " ]
+            , strong [] [ text (String.fromInt bid) ]
+            ]
+        ]
 
 
 companySize : Assets -> MergerType -> Html Msg
@@ -589,8 +573,44 @@ companySize assets merger =
         ]
 
 
-costTable : Assets -> MergerType -> Count -> (Bid -> Msg) -> Html Msg
-costTable assets merger (Count count) clickMsg =
+companySplit : Assets -> MergerType -> Count -> Html Msg
+companySplit assets merger (Count count) =
+    div [ class "screen" ]
+        [ breadcrumbs
+            [ mergerBreadcrumb assets merger
+            , countBreadcrumb merger (Count count)
+            , breadcrumbPlaceholder
+            ]
+        , p [ class "merger--hint" ] [ text "Select the ownership split" ]
+        , div [ class "split--list" ]
+            ([ button
+                [ onClick (SelectSplit merger (Count count) SingleCompany)
+                , class "split-item--button"
+                ]
+                [ span [ class "split-item--ratio" ] [ text "Single" ]
+                , span [ class "split-item--ratio" ] [ text "owner" ]
+                ]
+             ]
+                ++ List.map
+                    (\i ->
+                        button
+                            [ onClick (SelectSplit merger (Count count) (Split i (count - i)))
+                            , class "split-item--button"
+                            ]
+                            [ span [ class "split-item--ratio" ]
+                                [ text (String.fromInt i)
+                                , span [ class "split-item--divider" ] [ text "/" ]
+                                , text (String.fromInt (count - i))
+                                ]
+                            ]
+                    )
+                    (List.range 1 (count // 2))
+            )
+        ]
+
+
+costTable : Assets -> MergerType -> Count -> Split -> Html Msg
+costTable assets merger (Count count) split =
     let
         pricePerItem =
             minPrice merger
@@ -602,6 +622,7 @@ costTable assets merger (Count count) clickMsg =
         [ breadcrumbs
             [ mergerBreadcrumb assets merger
             , countBreadcrumb merger (Count count)
+            , splitBreadcrumb merger (Count count) split
             , breadcrumbPlaceholder
             ]
         , p [ class "merger--hint" ] [ text "Select the winning bid amount" ]
@@ -615,7 +636,7 @@ costTable assets merger (Count count) clickMsg =
                     in
                     ( "bid--" ++ String.fromInt i
                     , button
-                        [ onClick (clickMsg (Bid bid))
+                        [ onClick (SelectBid merger (Count count) split (Bid bid))
                         , class "bid-item--button"
                         ]
                         [ span [ class "bid-item--total" ]
@@ -632,43 +653,6 @@ costTable assets merger (Count count) clickMsg =
                     )
                 )
                 (List.range 0 150)
-            )
-        ]
-
-
-companySplit : Assets -> MergerType -> Count -> Bid -> Html Msg
-companySplit assets merger (Count count) bid =
-    div [ class "screen" ]
-        [ breadcrumbs
-            [ mergerBreadcrumb assets merger
-            , countBreadcrumb merger (Count count)
-            , bidBreadcrumb merger (Count count) bid (SelectCount merger (Count count))
-            , breadcrumbPlaceholder
-            ]
-        , p [ class "merger--hint" ] [ text "Select the ownership split" ]
-        , div [ class "split--list" ]
-            ([ button
-                [ onClick (SelectSplit merger (Count count) bid SingleCompany)
-                , class "split-item--button"
-                ]
-                [ span [ class "split-item--ratio" ] [ text "Single" ]
-                , span [ class "split-item--ratio" ] [ text "owner" ]
-                ]
-             ]
-                ++ List.map
-                    (\i ->
-                        button
-                            [ onClick (SelectSplit merger (Count count) bid (Split i (count - i)))
-                            , class "split-item--button"
-                            ]
-                            [ span [ class "split-item--ratio" ]
-                                [ text (String.fromInt i)
-                                , span [ class "split-item--divider" ] [ text "/" ]
-                                , text (String.fromInt (count - i))
-                                ]
-                            ]
-                    )
-                    (List.range 1 (count // 2))
             )
         ]
 
@@ -711,8 +695,8 @@ payments assets merger (Count count) (Bid bid) split =
         [ breadcrumbs
             [ mergerBreadcrumb assets merger
             , countBreadcrumb merger (Count count)
-            , bidBreadcrumb merger (Count count) (Bid bid) (ChangeBid merger (Count count) (Bid bid) split)
-            , splitBreadcrumb merger (Count count) (Bid bid) split
+            , splitBreadcrumb merger (Count count) split
+            , bidBreadcrumb merger (Count count) split (Bid bid)
             ]
         , case split of
             SingleCompany ->
