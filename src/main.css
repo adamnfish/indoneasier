@@ -507,7 +507,7 @@ footer {
 
 .bid-item--button {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   padding: 10px 12px 8px;
   background-color: #f5f2e8;
@@ -545,6 +545,13 @@ footer {
   font-weight: bold;
 }
 
+.bid-item--left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
 .bid-item--currency {
   font-size: 0.7em;
   font-weight: normal;
@@ -555,6 +562,11 @@ footer {
 .bid-item--breakdown {
   font-size: 0.8em;
   color: rgba(0,0,0,0.4);
+}
+
+.bid-item--split {
+  font-size: 0.8em;
+  color: rgba(0,0,0,0.3);
 }
 
 /* Split list */

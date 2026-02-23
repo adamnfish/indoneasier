@@ -633,21 +633,41 @@ costTable assets merger (Count count) split =
                     let
                         bid =
                             initial + (i * count)
+
+                        pricePerDeed =
+                            bid // count
+
+                        splitDisplay =
+                            case split of
+                                SingleCompany ->
+                                    text ""
+
+                                Split a b ->
+                                    span [ class "bid-item--split" ]
+                                        [ em [] [ text "Rp" ]
+                                        , text (String.fromInt (pricePerDeed * a))
+                                        , text " / "
+                                        , em [] [ text "Rp" ]
+                                        , text (String.fromInt (pricePerDeed * b))
+                                        ]
                     in
                     ( "bid--" ++ String.fromInt i
                     , button
                         [ onClick (SelectBid merger (Count count) split (Bid bid))
                         , class "bid-item--button"
                         ]
-                        [ span [ class "bid-item--total" ]
-                            [ em [ class "bid-item--currency" ] [ text "Rp" ]
-                            , text (String.fromInt bid)
+                        [ div [ class "bid-item--left" ]
+                            [ span [ class "bid-item--total" ]
+                                [ em [ class "bid-item--currency" ] [ text "Rp" ]
+                                , text (String.fromInt bid)
+                                ]
+                            , splitDisplay
                             ]
                         , span [ class "bid-item--breakdown" ]
                             [ text (String.fromInt count)
                             , text " × "
                             , em [] [ text "Rp" ]
-                            , text (String.fromInt (bid // count))
+                            , text (String.fromInt pricePerDeed)
                             ]
                         ]
                     )
