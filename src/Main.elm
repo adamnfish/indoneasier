@@ -124,31 +124,6 @@ mergerName merger =
             "Oil"
 
 
-mergerClassName : MergerType -> String
-mergerClassName merger =
-    case merger of
-        Shipping ->
-            "shipping"
-
-        Rice ->
-            "rice"
-
-        Spice ->
-            "spice"
-
-        RiceAndSpice ->
-            "rice-spice"
-
-        SiapFaji ->
-            "siap-faji"
-
-        Rubber ->
-            "rubber"
-
-        Oil ->
-            "oil"
-
-
 iconUrl : Assets -> MergerType -> String
 iconUrl assets merger =
     case merger of
@@ -454,7 +429,7 @@ mergerButton assets merger =
     ( "merger-item-" ++ mergerName merger
     , button
         [ onClick (SelectMerger merger)
-        , class ("merger-item--container company-type--" ++ mergerClassName merger)
+        , class "merger-item--container"
         ]
         [ img
             [ src (iconUrl assets merger)
