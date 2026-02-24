@@ -67,7 +67,7 @@ nav {
 
 .nav-bg {
   flex-grow: 1;
-  background-image: url('../public/nav-bg.png');
+  background-image: url('../public/nav-bg.jpg');
   background-size: cover;
 }
 
@@ -85,7 +85,7 @@ main {
 
 footer {
   height: 40px;
-  background-image: url('../public/nav-bg.png');
+  background-image: url('../public/nav-bg.jpg');
   background-size: cover;
   background-position-y: center;
   border-top: solid 1px rgba(53, 58, 38, 0.5);
