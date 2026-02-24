@@ -854,6 +854,7 @@ footer {
 .finish-merger--button {
   display: block;
   width: 100%;
+  margin-top: 16px;
   padding: 12px 16px;
   background-color: #f5f2e8;
   border: 1px solid rgba(0,0,0,0.08);

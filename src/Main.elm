@@ -319,10 +319,7 @@ welcome assets =
                             ]
                         , ul [ class "phase-rules" ]
                             [ li [] [ text "In turn order, players may announce a merger between any 2 companies until all players are unwilling or unable" ]
-                            , li [ class "phase-callout" ]
-                                [ text "Merging rice & spice into siap faji cannot be done in "
-                                , strong [] [ text "era a" ]
-                                ]
+                            , li [ class "phase-callout" ] [ text "Merging rice & spice into siap faji cannot be done in era a" ]
                             , li [] [ text "Size of the announced merger is limited by the announcing player's merger R&D level" ]
                             , li [] [ text "Announcing player must be able to hold the resulting company" ]
                             , li [] [ text "All players that could hold the resulting company may bid" ]
@@ -732,7 +729,7 @@ payments assets merger (Count count) (Bid bid) split =
             [ class "finish-merger--button"
             , onClick GoHome
             ]
-            [ text "Finish merger" ]
+            [ text "Close merger" ]
         ]
 
 
