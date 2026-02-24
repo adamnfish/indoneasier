@@ -49,5 +49,4 @@ The project uses [Parcel](https://parceljs.org/) as its build tool.
 npm install        # install dependencies
 npm start          # start the dev server
 npm run build      # production build (output in dist/)
-npm run lint       # run elm-review
 ```
