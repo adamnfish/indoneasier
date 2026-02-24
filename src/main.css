@@ -533,7 +533,7 @@ footer {
 }
 
 .bid-item--total {
-  font-size: 1.1em;
+  font-size: 1.4em;
   font-weight: bold;
 }
 
@@ -545,20 +545,20 @@ footer {
 }
 
 .bid-item--currency {
-  font-size: 0.7em;
+  font-size: 0.8em;
   font-weight: normal;
   margin-right: 3px;
-  color: rgba(0,0,0,0.5);
+  color: rgba(0,0,0,0.6);
 }
 
 .bid-item--breakdown {
-  font-size: 0.8em;
-  color: rgba(0,0,0,0.4);
+  font-size: 1em;
+  color: rgba(0,0,0,0.55);
 }
 
 .bid-item--split {
-  font-size: 0.8em;
-  color: rgba(0,0,0,0.3);
+  font-size: 1em;
+  color: rgba(0,0,0,0.5);
 }
 
 /* Split list */
