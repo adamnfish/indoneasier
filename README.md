@@ -50,3 +50,27 @@ npm install        # install dependencies
 npm start          # start the dev server
 npm run build      # production build (output in dist/)
 ```
+
+## End-to-end tests
+
+Browser-based end-to-end tests live in the [`e2e`](e2e) directory, using
+[Playwright](https://playwright.dev/). They run the full merger calculator
+flow and capture screenshots at each step, across a range of emulated
+devices (phones, tablet, desktop).
+
+To run the tests, first install the Playwright browser (one-time setup):
+
+```bash
+npx playwright install --with-deps chromium
+```
+
+Then build the app and run the tests:
+
+```bash
+npm run build          # tests run against the production build
+npm run test:e2e       # run the tests
+npm run test:e2e:report  # open the HTML report with screenshots
+```
+
+Screenshots are attached to each test in the HTML report. The CI workflow
+uploads the report as a build artifact on every push.
