@@ -60,8 +60,8 @@ test.describe('Merger flow', () => {
     await expect(page.locator('.split--list')).toBeVisible();
     await shot(page, testInfo, '03-split-owner-split-select');
 
-    // Select first ratio split (1/5) — index 1 skips "Single owner" at index 0
-    await page.locator('.split-item--button').nth(1).click();
+    // Select the 1/5 split by text
+    await page.locator('.split-item--button', { hasText: '1/5' }).click();
     await expect(page.locator('.bid--list')).toBeVisible();
     await shot(page, testInfo, '04-split-owner-cost-table');
 

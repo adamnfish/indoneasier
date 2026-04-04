@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0",
+    "serve": "^14.0.0",
     "@parcel/packager-raw-url": "^2.16.4",
     "@parcel/transformer-webmanifest": "^2.16.4",
     "elm": "^0.19.1-6",

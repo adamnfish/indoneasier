@@ -55,7 +55,7 @@ npm run build      # production build (output in dist/)
 
 Browser-based end-to-end tests live in the [`e2e`](e2e) directory, using
 [Playwright](https://playwright.dev/). They run the full merger calculator
-flow and capture screenshots at each step, across a range of emulated
+flow and capture screenshots at key steps, across a range of emulated
 devices (phones, tablet, desktop).
 
 To run the tests, first install the Playwright browser (one-time setup):
