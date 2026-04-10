@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, a, button, dd, div, dl, dt, em, footer, h2, img, li, main_, nav, p, span, strong, text, ul, br)
+import Html exposing (Html, a, br, button, dd, div, dl, dt, em, footer, h2, img, li, main_, nav, p, span, strong, text, ul)
 import Html.Attributes exposing (class, href, src)
 import Html.Events exposing (onClick)
 import Html.Keyed exposing (node)
@@ -334,7 +334,7 @@ welcome assets =
                             [ li [] [ text "In turn order, players operate one of their companies until all have operated" ]
                             , li [] [ text "Maximum expansion is determined by players' Expansion R&D level" ]
                             , li [] [ strong [] [ text "Goods companies: " ], br [] [], text "ship goods to cities with capacity via a single company's shipping chain; pay shipping costs to owners; must ship as many goods as possible; must expand fully for free if all goods are sold, or may pay to expand as desired" ]
-                            , li [] [ strong [] [ text "Shipping companies: " ], br [] [],  text "may expand for free, up to company's era capacity" ]
+                            , li [] [ strong [] [ text "Shipping companies: " ], br [] [], text "may expand for free, up to company's era capacity" ]
                             , li [ class "phase-callout" ] [ text "Double earnings in the final round" ]
                             ]
                         ]
