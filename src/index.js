@@ -1,3 +1,6 @@
+import '@fontsource/spectral/400.css';
+import '@fontsource/spectral/500.css';
+import '@fontsource/spectral/700.css';
 import './main.css';
 import { Elm } from './Main.elm';
 

@@ -25,5 +25,8 @@
     "@parcel/transformer-elm": {
       "elm": "$elm"
     }
+  },
+  "dependencies": {
+    "@fontsource/spectral": "^5.3.0"
   }
 }
