@@ -5,6 +5,10 @@
   More context in the issue:
     https://github.com/halfzebra/create-elm-app/issues/320
 */
+:root {
+  --font-serif: 'Spectral', Georgia, serif;
+}
+
 :focus-visible {
   outline: 3px solid #98C1C0;
 }
@@ -38,7 +42,7 @@ a:hover, a:active {
 html, body {
   margin: 0;
   background-color: #353A26;
-  font-family: serif;
+  font-family: var(--font-serif);
   height: 100%;
 }
 
@@ -119,10 +123,11 @@ footer {
   margin: 20px auto;
   padding: 4px 24px;
   background-color: #f5f2e8;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-left: 3px solid #b8c278;
+  border: 1px solid rgba(0,0,0,0.10);
   border-radius: 4px;
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 1px 1px rgba(0,0,0,0.05);
 }
 
 /* Documentation layout */
@@ -188,7 +193,7 @@ footer {
 }
 
 .doc-card-title {
-  background-color: #7A8640;
+  background-color: #353A26;
   color: #DED9C3;
   padding: 4px 10px;
 }
@@ -232,33 +237,37 @@ footer {
   gap: 4px;
   padding: 12px 8px 10px;
   background-color: #f5f2e8;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-bottom: 3px solid #b8c278;
+  border: 1px solid rgba(0,0,0,0.10);
   border-radius: 4px;
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 1px 1px rgba(0,0,0,0.05);
   cursor: pointer;
-  font-family: serif;
+  font-family: var(--font-serif);
   color: rgba(0,0,0,0.87);
-  transition: box-shadow 0.15s ease, border-bottom-color 0.15s ease, transform 0.1s ease;
+  transition: box-shadow 0.15s ease, background-color 0.15s ease, transform 0.1s ease;
 }
 
 .merger-item--container:hover {
-  box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
-  border-bottom-color: #7A8640;
   background-color: #eae6d4;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 2px 4px rgba(0,0,0,0.10);
 }
 
 .merger-item--container:active {
-  box-shadow: 0px 1px 2px rgba(0,0,0,0.1);
-  border-bottom-color: #7A8640;
-  transform: translateY(2px);
+  background-color: #eae6d4;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.18),
+              inset 0 -1px 0 rgba(255,255,255,0.4);
+  transform: translateY(1px);
 }
 
 .merger-item--container:focus-visible {
   outline: 2px solid #98C1C0;
   outline-offset: 2px;
-  box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
-  border-bottom-color: #7A8640;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 2px 4px rgba(0,0,0,0.10);
 }
 
 .merger-type--icon {
@@ -307,7 +316,7 @@ footer {
   width: 22px;
   height: 22px;
   flex-shrink: 0;
-  background-color: #7A8640;
+  background-color: #353A26;
   color: #DED9C3;
   border-radius: 50%;
   font-size: 0.75em;
@@ -416,7 +425,7 @@ footer {
   align-self: center;
   width: 22px;
   height: 22px;
-  background-color: #7A8640;
+  background-color: #353A26;
   border-radius: 50%;
 }
 
@@ -457,33 +466,37 @@ footer {
   gap: 2px;
   padding: 10px 4px 8px;
   background-color: #f5f2e8;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-bottom: 3px solid #b8c278;
+  border: 1px solid rgba(0,0,0,0.10);
   border-radius: 4px;
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 1px 1px rgba(0,0,0,0.05);
   cursor: pointer;
-  font-family: serif;
+  font-family: var(--font-serif);
   color: rgba(0,0,0,0.87);
-  transition: box-shadow 0.15s ease, border-bottom-color 0.15s ease, transform 0.1s ease;
+  transition: box-shadow 0.15s ease, background-color 0.15s ease, transform 0.1s ease;
 }
 
 .size-item--button:hover {
-  box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
-  border-bottom-color: #7A8640;
   background-color: #eae6d4;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 2px 4px rgba(0,0,0,0.10);
 }
 
 .size-item--button:active {
-  box-shadow: 0px 1px 2px rgba(0,0,0,0.1);
-  border-bottom-color: #7A8640;
-  transform: translateY(2px);
+  background-color: #eae6d4;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.18),
+              inset 0 -1px 0 rgba(255,255,255,0.4);
+  transform: translateY(1px);
 }
 
 .size-item--button:focus-visible {
   outline: 2px solid #98C1C0;
   outline-offset: 2px;
-  box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
-  border-bottom-color: #7A8640;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 2px 4px rgba(0,0,0,0.10);
 }
 
 .size-item--number {
@@ -507,33 +520,39 @@ footer {
   justify-content: space-between;
   padding: 10px 12px 8px;
   background-color: #f5f2e8;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-left: 3px solid #b8c278;
+  border: 1px solid rgba(0,0,0,0.10);
   border-radius: 4px;
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 1px 1px rgba(0,0,0,0.05);
   cursor: pointer;
-  font-family: serif;
+  font-family: var(--font-serif);
   color: rgba(0,0,0,0.87);
   text-align: left;
   width: 100%;
-  transition: box-shadow 0.15s ease, border-left-color 0.15s ease, background-color 0.15s ease;
+  transition: box-shadow 0.15s ease, background-color 0.15s ease, transform 0.1s ease;
 }
 
 .bid-item--button:hover {
-  box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
-  border-left-color: #7A8640;
   background-color: #eae6d4;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 2px 4px rgba(0,0,0,0.10);
 }
 
 .bid-item--button:active {
-  box-shadow: 0px 1px 2px rgba(0,0,0,0.08);
-  border-left-color: #7A8640;
+  background-color: #eae6d4;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.18),
+              inset 0 -1px 0 rgba(255,255,255,0.4);
+  transform: translateY(1px);
 }
 
 .bid-item--button:focus-visible {
   outline: 2px solid #98C1C0;
   outline-offset: 2px;
-  border-left-color: #7A8640;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 2px 4px rgba(0,0,0,0.10);
 }
 
 .bid-item--total {
@@ -582,33 +601,37 @@ footer {
   gap: 2px;
   padding: 10px 4px 8px;
   background-color: #f5f2e8;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-bottom: 3px solid #b8c278;
+  border: 1px solid rgba(0,0,0,0.10);
   border-radius: 4px;
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 1px 1px rgba(0,0,0,0.05);
   cursor: pointer;
-  font-family: serif;
+  font-family: var(--font-serif);
   color: rgba(0,0,0,0.87);
-  transition: box-shadow 0.15s ease, border-bottom-color 0.15s ease, transform 0.1s ease;
+  transition: box-shadow 0.15s ease, background-color 0.15s ease, transform 0.1s ease;
 }
 
 .split-item--button:hover {
-  box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
-  border-bottom-color: #7A8640;
   background-color: #eae6d4;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 2px 4px rgba(0,0,0,0.10);
 }
 
 .split-item--button:active {
-  box-shadow: 0px 1px 2px rgba(0,0,0,0.1);
-  border-bottom-color: #7A8640;
-  transform: translateY(2px);
+  background-color: #eae6d4;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.18),
+              inset 0 -1px 0 rgba(255,255,255,0.4);
+  transform: translateY(1px);
 }
 
 .split-item--button:focus-visible {
   outline: 2px solid #98C1C0;
   outline-offset: 2px;
-  box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
-  border-bottom-color: #7A8640;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 2px 4px rgba(0,0,0,0.10);
 }
 
 .split-item--ratio {
@@ -640,13 +663,14 @@ footer {
   min-height: 36px;
   padding: 15px 20px 14px 20px;
   background-color: #353A26;
-  border: none;
-  border-bottom: 2px solid #1a1e12;
+  border: 1px solid rgba(0,0,0,0.25);
   border-radius: 4px;
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.35);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06),
+              inset 0 -1px 2px rgba(0,0,0,0.35),
+              0 1px 2px rgba(0,0,0,0.30);
   box-sizing: border-box;
   cursor: pointer;
-  font-family: serif;
+  font-family: var(--font-serif);
   color: rgba(222, 217, 195, 0.87);
   font-size: 0.9em;
   transition: background-color 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
@@ -654,12 +678,15 @@ footer {
 
 .breadcrumb--button:hover {
   background-color: #2a2f1e;
-  box-shadow: 0px 2px 5px rgba(0,0,0,0.4);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08),
+              inset 0 -1px 2px rgba(0,0,0,0.35),
+              0 2px 4px rgba(0,0,0,0.40);
 }
 
 .breadcrumb--button:active {
   background-color: #1a1e12;
-  box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.45),
+              inset 0 -1px 0 rgba(255,255,255,0.05);
   transform: translateY(1px);
 }
 
@@ -796,35 +823,39 @@ footer {
   margin-top: 16px;
   padding: 12px 16px;
   background-color: #f5f2e8;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-bottom: 3px solid #b8c278;
+  border: 1px solid rgba(0,0,0,0.10);
   border-radius: 4px;
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 1px 1px rgba(0,0,0,0.05);
   cursor: pointer;
-  font-family: serif;
+  font-family: var(--font-serif);
   font-size: 0.9em;
   color: rgba(0,0,0,0.5);
   text-align: center;
-  transition: box-shadow 0.15s ease, border-bottom-color 0.15s ease, background-color 0.15s ease, transform 0.1s ease;
+  transition: box-shadow 0.15s ease, background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
 }
 
 .finish-merger--button:hover {
   background-color: #eae6d4;
-  border-bottom-color: #7A8640;
-  box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 2px 4px rgba(0,0,0,0.10);
   color: rgba(0,0,0,0.7);
 }
 
 .finish-merger--button:active {
   background-color: #eae6d4;
-  border-bottom-color: #7A8640;
-  box-shadow: 0px 1px 2px rgba(0,0,0,0.1);
-  transform: translateY(2px);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.18),
+              inset 0 -1px 0 rgba(255,255,255,0.4);
+  transform: translateY(1px);
 }
 
 .finish-merger--button:focus-visible {
   outline: 2px solid #98C1C0;
   outline-offset: 2px;
-  border-bottom-color: #7A8640;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7),
+              inset 0 -1px 2px rgba(0,0,0,0.10),
+              0 2px 4px rgba(0,0,0,0.10);
 }
 
