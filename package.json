@@ -14,10 +14,16 @@
     "@parcel/transformer-elm": "^2.16.4",
     "@parcel/transformer-webmanifest": "^2.16.4",
     "@playwright/test": "^1.49.0",
-    "elm": "^0.19.1-6",
+    "elm": "^0.19.2-0",
     "elm-format": "0.8.8",
-    "elm-test": "0.19.1-revision17",
+    "elm-test": "^0.19.2-0",
     "parcel": "^2.13.3",
     "serve": "^14.0.0"
+  },
+  "//": "elm override: @parcel/transformer-elm's peer range doesn't allow elm 0.19.2 yet; remove when it does",
+  "overrides": {
+    "@parcel/transformer-elm": {
+      "elm": "$elm"
+    }
   }
 }
